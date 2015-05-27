@@ -9,9 +9,9 @@ $.searchTitle.text = L('search');
 
 refreshAll();
 
-function refreshNow(callback)      { $.ptrNow.endRefreshing();      loadMovies('getNowPlaying', 'nowList',      callback); }
-function refreshUpcoming(callback) { $.ptrUpcoming.endRefreshing(); loadMovies('getUpcoming',   'upComingList', callback); }
-function refreshPopular(callback)  { $.ptrPopular.endRefreshing();  loadMovies('getPopular',    'popularList',  callback); }
+function refreshNow(callback)      { if (OS_IOS) $.ptrNow.endRefreshing();      loadMovies('getNowPlaying', 'nowList',      callback); }
+function refreshUpcoming(callback) { if (OS_IOS) $.ptrUpcoming.endRefreshing(); loadMovies('getUpcoming',   'upComingList', callback); }
+function refreshPopular(callback)  { if (OS_IOS) $.ptrPopular.endRefreshing();  loadMovies('getPopular',    'popularList',  callback); }
 
 function refreshAll() {
 	refreshNow(function(err) {

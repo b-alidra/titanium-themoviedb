@@ -6,7 +6,8 @@ refresh();
 var page = 1;
 
 function refresh() {
-	$.ptr.endRefreshing();
+	if (OS_IOS)
+		$.ptr.endRefreshing();
 	if (__.isEmpty($.term.value))
 		popular_shows();
 	else

@@ -9,7 +9,7 @@
 						</View>
 					</View>
 					<TableView id="nowList" class="moviesList">
-						<RefreshControl id="ptrNow" onRefreshstart="refreshNow"/>
+						<RefreshControl platform="ios" id="ptrNow" onRefreshstart="refreshNow"/>
 					</TableView>
 				</View>
 				<View>
@@ -19,7 +19,7 @@
 						</View>
 					</View>
 					<TableView id="upComingList" class="moviesList">
-						<RefreshControl id="ptrUpcoming" onRefreshstart="refreshUpcoming"/>
+						<RefreshControl platform="ios" id="ptrUpcoming" onRefreshstart="refreshUpcoming"/>
 					</TableView>
 				</View>
 				<View>
@@ -29,7 +29,7 @@
 						</View>
 					</View>
 					<TableView id="popularList" class="moviesList">
-						<RefreshControl id="ptrPopular" onRefreshstart="refreshPopular"/>
+						<RefreshControl platform="ios" id="ptrPopular" onRefreshstart="refreshPopular"/>
 					</TableView>
 				</View>
 				<View>
@@ -39,7 +39,7 @@
 						</View>
 					</View>
 					<TableView id="searchList" class="moviesList">
-						<RefreshControl id="ptrSearch" onRefreshstart="refreshSearch"/>
+						<RefreshControl platform="ios" id="ptrSearch" onRefreshstart="refreshSearch"/>
 					</TableView>
 					<TextField id="term"/>
 				</View>

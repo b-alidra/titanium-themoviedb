@@ -7,7 +7,7 @@
 		</View>
 		<View id="content">
 			<TableView id="tableList">
-				<RefreshControl id="ptr" onRefreshstart="refresh"/>
+				<RefreshControl platform="ios" id="ptr" onRefreshstart="refresh"/>
 			</TableView>
 			<TextField id="term"/>
 		</View>

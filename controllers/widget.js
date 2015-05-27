@@ -13,7 +13,8 @@ refresh();
 
 function refresh() {
 	Alloy.Globals.loading.show(L('list_loading'), false);
-	$.ptr.endRefreshing();
+	if (OS_IOS)
+		$.ptr.endRefreshing();
 	loadTorrents();
 }
 

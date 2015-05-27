@@ -1,7 +1,9 @@
 "Window": {
 	backgroundColor: "#FFFFFF",
-    statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT,
     layout: "absolute"
+},
+"Window[platform=ios]": {
+    statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
 },
 "#wrapper" : {
 	backgroundColor: "#FFFFFF",
