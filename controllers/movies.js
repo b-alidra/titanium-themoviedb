@@ -77,9 +77,9 @@ function loadMovies(type, list, callback) {
 function search() {
 	Alloy.Globals.loading.show(L('list_loading'), false);
 	
-	api.search.movie({ query: $.term.value }, 
+	api.search.getMovie({ query: $.term.value }, 
 		function(response) {
-			buildList(list, response);
+			buildList('searchList', response);
 			Alloy.Globals.loading.hide();
 		},
 		function(err) {

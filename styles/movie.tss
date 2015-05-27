@@ -152,7 +152,8 @@
 		fontSize: '12dp'
 	},
 	color: "#000000",
-	backgroundColor: "#FFFFFF"
+	backgroundColor: "#FFFFFF",
+	editable: false
 },
 "#torrentsWrapper": {
 	backgroundColor: "#FFFFFF",
