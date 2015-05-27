@@ -1,0 +1,53 @@
+<Alloy>
+	<View>
+		<View id="content">
+			<ScrollableView>
+				<View>
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="nowTitle" />
+						</View>
+					</View>
+					<TableView id="nowList" class="moviesList">
+						<RefreshControl id="ptrNow" onRefreshstart="refreshNow"/>
+					</TableView>
+				</View>
+				<View>
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="upcomingTitle" />
+						</View>
+					</View>
+					<TableView id="upComingList" class="moviesList">
+						<RefreshControl id="ptrUpcoming" onRefreshstart="refreshUpcoming"/>
+					</TableView>
+				</View>
+				<View>
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="popularTitle" />
+						</View>
+					</View>
+					<TableView id="popularList" class="moviesList">
+						<RefreshControl id="ptrPopular" onRefreshstart="refreshPopular"/>
+					</TableView>
+				</View>
+				<View>
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="searchTitle"/>
+						</View>
+					</View>
+					<TableView id="searchList" class="moviesList">
+						<RefreshControl id="ptrSearch" onRefreshstart="refreshSearch"/>
+					</TableView>
+					<TextField id="term"/>
+				</View>
+			</ScrollableView>
+		</View>
+		<Button id="search_button" onClick="search">
+			<Label id="search_button_icon" class="fa-icon" icon="fa-check"/>
+		</Button>
+		<Widget id="fa" src="com.mattmcfarland.fontawesome" debug="true"/>
+	</View>
+</Alloy>

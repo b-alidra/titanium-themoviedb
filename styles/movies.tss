@@ -1,0 +1,53 @@
+"#content": {
+	top: 0,
+	bottom: 0,
+	backgroundColor : Alloy.Globals.theme.movies.backgroundColor,
+	opacity: 0.95
+},
+".moviesList": {
+	top: "48dp",
+	width: "100%",
+	left: 0,
+	bottom: 0,
+	backgroundColor : Alloy.Globals.theme.movies.backgroundColor,
+	footerTitle: "",
+    separatorColor: Alloy.Globals.theme.movies.separatorColor
+},
+"#searchList": {
+	top: "40dp"
+},
+"#ptr": {
+	tintColor: Alloy.Globals.theme.movies.refreshColor
+}, 
+"#term": {
+	height: Ti.UI.SIZE,
+	left: "5%",
+	right: '5%',
+	top: "5dp",
+	font: {
+		fontSize: '16dp',
+		fontWeight: 'bold'
+	},
+	color: Alloy.Globals.theme.movies.searchTextColor,
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
+	hintText: L('your_search'),
+},
+"#search_button": {
+	width: "120dp",
+	height: "120dp",
+	center: {
+		x: "100%",
+		y: "100%"
+	},
+	backgroundColor: Alloy.Globals.theme.buttons.search.backgroundColor,
+	backgroundFocusedColor: Alloy.Globals.theme.buttons.search.backgroundFocusedColor,
+	borderRadius: 60
+},
+"#search_button_icon": {
+	color: Alloy.Globals.theme.buttons.search.color,
+	font: { fontSize: 36 },
+	center: {
+		x: "30%",
+		y: "30%"
+	}
+}

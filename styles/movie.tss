@@ -1,0 +1,211 @@
+"Window": {
+	backgroundColor: "#FFFFFF",
+    statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT,
+    layout: "absolute"
+},
+"#wrapper" : {
+	backgroundColor: "#FFFFFF",
+	top: 0,
+	left: 0,
+	right: 0,
+	bottom: "55dp"
+},
+"#backIcon": {
+	font: {
+		fontSize: "36dp",
+		fontWeight: "bold"
+	},
+	color: "#FFFFFF",
+	top: "30dp",
+	left: "10dp",
+	zIndex: 10,
+	width: "50dp",
+	height: "50dp"
+},
+"#headerImage": {
+	top: 0,
+	left: 0,
+	right: 0,
+	height: Titanium.UI.SIZE,
+	preventDefaultImage: true,
+	zIndex: 1
+},
+"#voteRow": {
+	height: "25dp",
+	top: "-15dp",
+	width: Titanium.UI.SIZE,
+	right: "10dp",
+	zIndex: 12
+},
+"#posterWrapper": {
+	left: "10dp",
+	right: "10dp",
+	height: "110dp",
+	top: "-75dp",
+	zIndex: 10,
+	backgroundColor: "transparent"
+},
+"#poster": {
+	preventDefaultImage: true,
+	borderWidth: 2,
+	borderColor: "#FFFFFF",
+	borderRadius: 4,
+	left: 0,
+	width: Titanium.UI.SIZE,
+	height: "100dp",
+	zIndex: 10
+},
+"#downloadButton": {
+	right: 0,
+	bottom: "15dp",
+	borderWidth: 1,
+	borderColor: "#FC4545",
+	borderRadius: 4,
+	color: "#FC4545",
+	backgroundColor: "#FFFFFF",
+	height: "24dp",
+	width: "80dp",
+	textAlign: "center"
+},
+"#downloadButtonIcon": {
+	font: {
+		fontSize: '10dp',
+		fontWeight: 'bold'
+	},
+	color: "#FC4545",
+	top: "6dp",
+	left: "5dp"
+},
+"#downloadButtonText": {
+	font: {
+		fontSize: '10dp',
+		fontWeight: 'bold'
+	},
+	color: "#FC4545",
+	top: "5dp",
+	left: "5dp"
+},
+"#infosWrapper": {
+	top: "5dp",
+	left: 0,
+	backgroundColor: "#FFFFFF",
+	zIndex: 10,
+	right: "10dp"
+}
+"#title": {
+	left: "10dp",
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: '24dp',
+		fontWeight: 'bold'
+	},
+	color: "#000000"
+},
+"#year": {
+	left: "10dp",
+	font: {
+		fontSize: '14dp'
+	},
+	color: "#000000"
+},
+"#genres": {
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: '12dp'
+	},
+	color: "#000000",
+	left: "10dp",
+	right: "10dp"
+},
+"#tabs": {
+	top: "10dp",
+	bottom: "35dp",
+	backgroundColor: "#FFFFFF",
+	 pagingControlColor: "#000000",
+	 pagingControlAlpha: "0.8",
+	 pagingControlOnTop: "true"
+},
+".tabsTitle": {
+	font: {
+		fontSize: '12dp',
+		fontWeight: 'bold'
+	},
+	color: "#000000",
+	top: "5dp",
+	width: "100%",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
+},
+".active_tab": { font: { fontWeight: "bold" }},
+"#overviewWrapper": {
+	backgroundColor: "#FFFFFF",
+	height: Titanium.UI.FILL
+},
+"#overview": {
+	top: "5dp",
+	left: "10dp",
+	right: "10dp",
+	bottom: 0,
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: '12dp'
+	},
+	color: "#000000",
+	backgroundColor: "#FFFFFF"
+},
+"#torrentsWrapper": {
+	backgroundColor: "#FFFFFF",
+	height: Titanium.UI.FILL
+},
+"#heartIcon": {
+	font: { fontSize: '10dp' },
+	color: "#FFFFFF"
+},
+"#score": {
+	font: { fontSize: '10dp' },
+	color: "#FFFFFF",
+	left: "2dp"
+},
+"#nbVotes": {
+	font: { fontSize: '10dp' },
+	color: "#FFFFFF",
+	left: "5dp"
+},
+"#votes": {
+	font: { fontSize: '10dp' },
+	color: "#999999",
+	left: "2dp"
+},
+"#cast": {
+	contentWidth: 'auto',
+	contentHeight: 'auto',
+	showVerticalScrollIndicator: true,
+	showHorizontalScrollIndicator: true,
+	height: '80dp',
+	left: "5dp",
+	right: "5dp",
+	bottom: "5dp",
+	backgroundColor: "#FFFFFF"
+},
+"#cast_images": {
+	width: "2000dp",
+	height: "80dp"
+},
+".cast_image": {
+	width: "50dp",
+	height: "80dp",
+	left: "5dp",
+	preventDefaultImage: true,
+	borderRadius: 0,
+	borderWidth: 2,
+	borderColor: "#FFFFFF"
+},
+".vsep": {
+	width: "1dp",
+	height: "100%",
+	backgroundColor: "#000000"
+},
+".hsep": {
+	width: "100%",
+	height: "1dp",
+	backgroundColor: "#000000"
+}

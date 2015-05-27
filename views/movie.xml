@@ -1,0 +1,41 @@
+<Alloy>
+	<Window id="win">
+		<View class="vgroup" id="wrapper">
+			<ImageView id="headerImage"></ImageView>
+			<View class="hgroup" id="voteRow">
+				<Label id="heartIcon" class="fa-icon" icon="fa-heart"/>
+				<Label id="score"></Label>
+				<Label id="nbVotes"></Label>
+				<Label id="votes"></Label>
+			</View>
+			<View class="abs" id="posterWrapper">
+				<ImageView id="poster"></ImageView>
+				<Button id="downloadButton" class="hgroup">
+					<Label id="downloadButtonIcon" class="fa-icon" icon="fa-download"/>
+					<Label id="downloadButtonText"/>
+				</Button>
+			</View>
+			<View class="vgroup">
+				<View class="hgroup" id="infosWrapper">
+					<Label id="title"></Label>
+					<Label id="year"></Label>
+				</View>
+				<Label id="genres"></Label>
+			</View>
+			<ScrollableView id="tabs" showPagingControl="true">
+				<View id="overviewWrapper" class="vgroup">
+					<Label id="synopsisTitle" class="tabsTitle"/>
+					<TextArea id="overview"></TextArea>
+				</View>
+				<View id="torrentsWrapper" class="vgroup">
+					<Label id="torrentsTitle" class="tabsTitle"/>
+				</View>
+			</ScrollableView>
+       	</View>
+		<ScrollView id="cast">
+			<View class="hgroup" id="cast_images" />
+		</ScrollView>
+		<Label id="backIcon" class="fa-icon" icon="fa-angle-left"/>
+		<Widget id="fa" src="com.mattmcfarland.fontawesome" debug="true"/>
+	</Window>
+</Alloy>

@@ -1,0 +1,26 @@
+var __  = require('alloy/underscore'),
+	api	= require('themoviedb/themoviedb');
+
+var args = arguments[0] || {};
+for (var i = 0; i < args.length; i++) {
+	var arg = args[i];
+	var ban = $['banner' + (i+1)];
+	ban.movie_id = arg.id;
+	arg = arg.movie || arg.show || arg;
+	
+	ban.image = api.common.getImage({'size': 'w500', 'file': arg.poster_path});
+	Ti.API.info(ban.image);
+	ban.addEventListener('load', function() {
+		this.animate({
+			opacity : 1,
+			duration : 200
+		});
+	});
+}
+
+function selectedMovie(e) {
+	var movie = Widget.createController('movie', e.source.movie_id).getView();
+	//movie.left = Ti.Platform.displayCaps.platformWidth;
+	movie.open();
+	movie.animate({ "left": 0, "duration" : 500 });
+}

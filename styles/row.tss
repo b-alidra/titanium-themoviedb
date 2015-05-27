@@ -1,0 +1,21 @@
+"#row": {
+	backgroundColor: Alloy.Globals.theme.movies.rowBackgroundColor,
+	selectedBackgroundColor: Alloy.Globals.theme.movies.separatorColor,//Alloy.Globals.theme.menu.selectedRowBackgroundColor,
+	height: "180dp",
+	borderWidth: 1,
+	borderColor: Alloy.Globals.theme.movies.separatorColor,
+	left: "5dp"
+},
+"#rowWrapper": { left: "5dp", right: 0 },
+".bannerWrapper": { width: "33%", backgroundColor: Alloy.Globals.theme.movies.rowBackgroundColor },
+".banner": {
+	opacity: 0,
+	top: "5dp",
+	left: 0,
+	bottom: 0,
+	right: "5dp",
+	preventDefaultImage: true,
+	viewShadowColor: Alloy.Globals.theme.movies.banner.shadowColor,
+    viewShadowOffset:{x:"0",y:"0"},
+    viewShadowRadius: Alloy.Globals.theme.movies.banner.shadowRadius
+}
