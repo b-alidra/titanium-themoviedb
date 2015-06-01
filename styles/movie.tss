@@ -159,6 +159,15 @@
 	backgroundColor: "#FFFFFF",
 	height: Titanium.UI.FILL
 },
+"#torrentsList": {
+	top: 0,
+	left: 0,
+	right: "15dp",
+	bottom: 0,
+	backgroundColor : "#FFFFFF",
+	footerTitle: "",
+    separatorColor: Alloy.Globals.theme.movies.separatorColor
+}
 "#heartIcon": {
 	font: { fontSize: '10dp' },
 	color: "#FFFFFF"

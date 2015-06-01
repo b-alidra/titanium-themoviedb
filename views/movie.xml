@@ -29,6 +29,7 @@
 				</View>
 				<View id="torrentsWrapper" class="vgroup">
 					<Label id="torrentsTitle" class="tabsTitle"/>
+					<TableView id="torrentsList" />
 				</View>
 			</ScrollableView>
        	</View>
