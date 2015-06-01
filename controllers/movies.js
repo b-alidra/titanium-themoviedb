@@ -1,11 +1,12 @@
-var __  = require('alloy/underscore'),
-	api	= require('themoviedb/themoviedb');
+var __  	= require('alloy/underscore'),
+	api		= require('themoviedb/themoviedb');
+	
 api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
 
 $.nowTitle.text = L('now_movies');
 $.upcomingTitle.text = L('upcoming_movies');
 $.popularTitle.text = L('popular_movies');
-$.searchTitle.text = L('search');
+//$.searchTitle.text = L('search');
 
 refreshAll();
 

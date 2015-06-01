@@ -1,13 +1,13 @@
 <Alloy>
 	<TableViewRow id="row" class="row">
 		<View class="hgroup" id="rowWrapper">
-			<View class="bannerWrapper">
+			<View class="bannerWrapper" layout="absolute">
 				<ImageView id="banner1" class="banner" onClick="selectedMovie"></ImageView>
 			</View>
-			<View class="bannerWrapper">
+			<View class="bannerWrapper" layout="absolute">
 				<ImageView id="banner2" class="banner" onClick="selectedMovie"></ImageView>
 			</View>
-			<View class="bannerWrapper">
+			<View class="bannerWrapper" layout="absolute">
 				<ImageView id="banner3" class="banner" onClick="selectedMovie"></ImageView>
 			</View>
 		</View>

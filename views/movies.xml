@@ -33,18 +33,15 @@
 					</TableView>
 				</View>
 				<View class="vgroup">
-					<View class="toolbar">
-						<View class="toolbar_title_holder">
-							<Label class="toolbar_title" id="searchTitle"/>
-						</View>
+					<View id="search_wrapper" class="hgroup">
+						<TextField id="term"/>
+						<Button id="search_button" onClick="search">
+							<Label id="search_button_icon" class="fa-icon" icon="fa-check"/>
+						</Button>
 					</View>
-					<TextField id="term"/>
 					<TableView id="searchList" class="moviesList">
 						<RefreshControl platform="ios" id="ptrSearch" onRefreshstart="refreshSearch"/>
 					</TableView>
-					<Button id="search_button" onClick="search">
-						<Label id="search_button_icon" class="fa-icon" icon="fa-check"/>
-					</Button>
 				</View>
 			</ScrollableView>
 		</View>
