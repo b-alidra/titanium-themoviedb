@@ -1,0 +1,68 @@
+"#row": {
+	backgroundColor: Alloy.Globals.theme.list.rowBackgroundColor,
+	selectedBackgroundColor: Alloy.Globals.theme.list.separatorColor,//Alloy.Globals.theme.menu.selectedRowBackgroundColor,
+	height: "40dp",
+	borderWidth: 1,
+	borderColor: Alloy.Globals.theme.list.separatorColor,
+},
+"#infos_wrapper": {
+	left: "5dp",
+	right: "30dp"
+}
+"#icon": {
+	right: "10dp",
+	color:  Alloy.Globals.theme.list.iconColor,
+	font: {
+		fontSize: "16"		
+	}
+},
+"#torrent_title": {
+	left: "10dp",
+	color: Alloy.Globals.theme.list.titleColor,
+	font: {
+		fontSize: "10",
+		fontFamily: "OpenSans-Bold"
+	},
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
+	height: "15dp"
+},
+"#torrent_size": {
+	left: "10dp",
+	width: "45dp",
+	color: Alloy.Globals.theme.list.infoColor,
+	font: {
+		fontSize: "8",
+		fontFamily: "OpenSans"
+	},
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT
+}
+,
+"#torrent_seeders": {
+	left: "10dp",
+	width: "50dp",
+	color: "#138F16",
+	font: {
+		fontSize: "8",
+		fontFamily: "OpenSans-Bold"
+	},
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT
+},
+"#torrent_leechers": {
+	left: "10dp",
+	width: "50dp",
+	color: "#D23019",
+	font: {
+		fontSize: "8",
+		fontFamily: "OpenSans-Bold"
+	},
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT
+},
+"#torrent_date": {
+	left: "10dp",
+	width: Titanium.UI.SIZE,
+	font: {
+		fontSize: "8",
+		fontFamily: "OpenSans"
+	},
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT
+}

@@ -1,0 +1,19 @@
+<Alloy>
+	<TableViewRow id="row" class="row">
+		<View class="abs">
+			<View class="vgroup" id="infos_wrapper">
+				<View class="hgroup">
+					<Label id="torrent_title"/>
+				</View>
+				<View class="hgroup">
+					<Label id="torrent_size"/>
+					<Label id="torrent_seeders"/>
+					<Label id="torrent_leechers"/>
+					<Label id="torrent_date"/>
+				</View>
+			</View>
+			<Label id="icon" class="fa-icon" />
+		</View>
+		<Widget id="fa" src="com.mattmcfarland.fontawesome" />
+	</TableViewRow>
+</Alloy>
