@@ -10,6 +10,7 @@
 					</View>
 					<TableView id="nowList" class="moviesList">
 						<RefreshControl platform="ios" id="ptrNow" onRefreshstart="refreshNow"/>
+						<Widget id="isNow" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreNow" />
 					</TableView>
 				</View>
 				<View class="vgroup">
@@ -20,6 +21,7 @@
 					</View>
 					<TableView id="upComingList" class="moviesList">
 						<RefreshControl platform="ios" id="ptrUpcoming" onRefreshstart="refreshUpcoming"/>
+						<Widget id="isUpcoming" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreUpcoming" />
 					</TableView>
 				</View>
 				<View class="vgroup">
@@ -30,6 +32,7 @@
 					</View>
 					<TableView id="popularList" class="moviesList">
 						<RefreshControl platform="ios" id="ptrPopular" onRefreshstart="refreshPopular"/>
+						<Widget id="isPopular" src="nl.fokkezb.infiniteScroll" onEnd="loadMorePopular" />
 					</TableView>
 				</View>
 				<View class="vgroup">
@@ -41,6 +44,7 @@
 					</View>
 					<TableView id="searchList" class="moviesList">
 						<RefreshControl platform="ios" id="ptrSearch" onRefreshstart="refreshSearch"/>
+						<Widget id="isSearch" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreSearch" />
 					</TableView>
 				</View>
 			</ScrollableView>

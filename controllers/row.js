@@ -10,11 +10,12 @@ for (var i = 0; i < args.length; i++) {
 
 	if (__.isEmpty(arg.poster_path)) {
 		ban.image = 'poster.png';
-		/*$['bannerTitle' + (i+1)].text    = "Test";//args.original_title;
-		$['bannerTitle' + (i+1)].opacity = 1;*/ 
+		$['bannerTitle' + (i+1)].text    = arg.original_title;
+		$['bannerTitle' + (i+1)].opacity = 1; 
 	}
 	else {
-		ban.image = api.common.getImage({'size': 'w500', 'file': arg.poster_path});
+		ban.image = api.common.getImage({'size': 'w300', 'file': arg.poster_path});
+		$['bannerTitle' + (i+1)].opacity = 0;
 	}
 	ban.addEventListener('load', function() {
 		this.animate({

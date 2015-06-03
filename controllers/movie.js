@@ -2,7 +2,8 @@ var underscore  = require('alloy/underscore'),
 	api			= require('themoviedb/themoviedb'),
 	t411		= new (require('t411/t411'))();
 	
-var TORRENTS_SLIDE_INDEX = 1;
+var TORRENTS_SLIDE_INDEX = 2;
+var TORRENTS_SLIDE_INDEX = 2;
 
 api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
 
@@ -13,18 +14,19 @@ Alloy.Globals.loading.show(L('list_loading'), false);
 
 $.downloadButtonText.text	= L('download');
 $.votes.text				= L('votes').toUpperCase();
+$.trailersTitle.text		= L('trailer');
 $.synopsisTitle.text		= L('synopsis');
 $.torrentsTitle.text		= L('torrents');
 
-api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'images,list,credits', 'include_image_language': 'fr' },
+api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'images,trailers,credits', 'include_image_language': 'fr,en,null' },
 	function(response) {
 		if (underscore.isEmpty(response))
 			return false;
 		
 		movie = JSON.parse(response);
-		
+		Ti.API.info(movie);
 		$.headerImage.image	= api.common.getImage({'size': 'w500', 'file': movie.backdrop_path});
-		$.poster.image		= api.common.getImage({'size': 'w500', 'file': movie.poster_path});
+		$.poster.image		= api.common.getImage({'size': 'w300', 'file': movie.poster_path});
 		$.title.text		= movie.title;
 		$.year.text			= movie.release_date ? movie.release_date.substring(0, 4) : '';
 		$.score.text		= movie.popularity ? parseInt(movie.popularity) + "%" : 0;
@@ -40,7 +42,6 @@ api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'im
 			});
 			$.genres.text = genres.join(' - ');
 		}
-		$.headerImage.image = api.common.getImage({'size': 'w500', 'file': movie.backdrop_path});
 		
 		setTimeout(function() {
 			underscore.each(movie.credits.cast, function(c) {
@@ -48,7 +49,7 @@ api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'im
 					return false;
 				$.cast_images.add(Ti.UI.createImageView({
 					"class": "cast_image",
-					"image" : api.common.getImage({'size': 'w500', 'file': c["profile_path"]}),
+					"image" : api.common.getImage({'size': 'w150', 'file': c["profile_path"]}),
 					"width": "50dp",
 					"height": "80dp",
 					"right": "5dp",
@@ -59,6 +60,20 @@ api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'im
 			});
 		}, 1000);
 				
+		if (movie.trailers.youtube.length > 0) {
+			underscore.each(movie.trailers.youtube, function(t) {
+				$.trailersWrapper.add(Ti.UI.createWebView({
+				    url: 'http://www.youtube.com/embed/' + t.source + '?autoplay=1&autohide=1&cc_load_policy=0&color=white&controls=0&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0',
+				    enableZoomControls: false,
+				    scalesPageToFit: false,
+				    scrollsToTop: false,
+				    showScrollbars: false
+				}));
+			});			
+		}
+		else {
+			$.tabs.remove($.trailersWrapper);
+		}
 		Alloy.Globals.loading.hide();
 	},
 	function() {

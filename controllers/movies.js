@@ -1,12 +1,9 @@
-var __  	= require('alloy/underscore'),
-	api		= require('themoviedb/themoviedb');
-	
+var api	= require('themoviedb/themoviedb');	
 api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
 
-$.nowTitle.text = L('now_movies');
-$.upcomingTitle.text = L('upcoming_movies');
-$.popularTitle.text = L('popular_movies');
-//$.searchTitle.text = L('search');
+$.nowTitle.text			= L('now_movies');
+$.upcomingTitle.text	= L('upcoming_movies');
+$.popularTitle.text		= L('popular_movies');
 
 refreshAll();
 
@@ -27,9 +24,23 @@ function refreshAll() {
 }
 
 function refreshSearch() {
-	if (!__.isEmpty($.term.value))
+	if (!_.isEmpty($.term.value))
 		search();
 };
+var nowPage		 = 1,
+	upcomingPage = 1,
+	popularPage  = 1,
+	searchPage	 = 1;
+
+$.isNow.init($.nowList);
+$.isUpcoming.init($.upComingList);
+$.isPopular.init($.popularList);
+$.isSearch.init($.searchList);
+
+function loadMoreNow(e) { loadMovies('getNowPlaying', 'nowList', function(err) { (e[err ? 'error' : 'success'])(); }, ++nowPage); }
+function loadMoreUpcoming(e) { loadMovies('getUpcoming', 'upComingList', function(err) { (e[err ? 'error' : 'success'])(); }, ++upcomingPage); }
+function loadMorePopular(e) { loadMovies('getPopular', 'popularList', function(err) { (e[err ? 'error' : 'success'])(); }, ++popularPage); }
+function loadMoreSearch(e) { search(++searchPage, function(err) { (e[err ? 'error' : 'success'])(); }); }
 
 function next() {
 	tkt_api.next(function(err, response) {
@@ -51,14 +62,16 @@ function next() {
 	});
 }
 
-function loadMovies(type, list, callback) {
+function loadMovies(type, list, callback, page) {
 	Alloy.Globals.loading.show(L('list_loading'), false);
 	
-	api.movies[type]({'language': 'fr', 'limit': 30, 'include_adult': false},
+	page = page || 1;
+	
+	api.movies[type]({'language': 'fr', 'include_adult': false, 'page': page, 'include_image_language': 'fr, en,null'},
 		function(response) {
-			buildList(list, response);
+			buildList(list, response, page > 1);
 			Alloy.Globals.loading.hide();
-			__.isFunction(callback) && callback(null);
+			_.isFunction(callback) && callback(null);
 		},
 		function(err) {
 			Alloy.Globals.loading.hide();
@@ -68,20 +81,24 @@ function loadMovies(type, list, callback) {
 			    view: $.tableList
 			});
 			
-			__.isFunction(callback) && callback({});
+			_.isFunction(callback) && callback({});
 			
 			return false;
 		}
 	);
 }
 
-function search() {
+function search(page, callback) {
 	Alloy.Globals.loading.show(L('list_loading'), false);
 	
-	api.search.getMovie({ query: $.term.value }, 
+	page		= page || 1;
+	searchPage	= page;
+	
+	api.search.getMovie({ query: $.term.value, page: page }, 
 		function(response) {
-			buildList('searchList', response);
+			buildList('searchList', response, page > 1);
 			Alloy.Globals.loading.hide();
+			_.isFunction(callback) && callback(null);
 		},
 		function(err) {
 			Alloy.Globals.loading.hide();
@@ -91,21 +108,41 @@ function search() {
 			    view: $.tableList
 			});
 			
+			_.isFunction(callback) && callback({});
+			
 			return false;
 		}
 	);
 };
 
+/**
+ * TheMovieDB API doesn't support custom pagination, it only answers with 20 results max.
+ * As we show three movies per row, we fill the rows and store the pending for the next time.
+ */
+var pendingMovies = {
+	'nowList': [],
+	'upComingList': [],
+	'popularList': [],
+	'searchList': []
+};
+
 function buildList(list, response, append) {
 	$[list].removeAllChildren();
 	
-	if (__.isEmpty(response))
+	if (_.isEmpty(response))
 		return false;
 		
 	response = JSON.parse(response);
-	if (__.isEmpty(response.results))
+	if (_.isEmpty(response.results))
 		return false;
 		
+	if (!_.isEmpty(pendingMovies[list])) {
+		response.results = pendingMovies[list].concat(response.results);
+	} 
+	if (response.results.length % 3 > 0) {
+		pendingMovies[list] = _.rest(response.results, response.results.length - response.results.length % 3);
+		response.results = _.first(response.results, response.results.length - response.results.length % 3);
+	}
 	var rows = [];
 	for (var i = 0; i < response.results.length; i += 3) {
 		var results = [response.results[i]];
@@ -122,7 +159,7 @@ function buildList(list, response, append) {
 		else
 			rows.push(row);
 	}
-	/*__.each(response.results, function(m) {
+	/*_.each(response.results, function(m) {
 		var row = Widget.createController('row', m).getView();
 		if (append)
 			$.tableList.appendRow(row);

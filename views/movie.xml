@@ -23,6 +23,9 @@
 				<Label id="genres"></Label>
 			</View>
 			<ScrollableView id="tabs" showPagingControl="true">
+				<View id="trailersWrapper" class="vgroup">
+					<Label id="trailersTitle" class="tabsTitle"/>
+				</View>
 				<View id="overviewWrapper" class="vgroup">
 					<Label id="synopsisTitle" class="tabsTitle"/>
 					<TextArea id="overview"></TextArea>

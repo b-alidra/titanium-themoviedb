@@ -17,5 +17,21 @@
 	preventDefaultImage: true,
 	viewShadowColor: Alloy.Globals.theme.movies.banner.shadowColor,
     viewShadowOffset:{x:"0",y:"0"},
-    viewShadowRadius: Alloy.Globals.theme.movies.banner.shadowRadius
+    viewShadowRadius: Alloy.Globals.theme.movies.banner.shadowRadius,
+    zIndex: 5
+},
+".bannerTitle": {
+	opacity: 0,
+	top: "7dp",
+	left: "4dp",
+	right: "7dp",
+	backgroundColor: "#000000",
+	opacity: 0.75,
+	color: "#FFFFFF",
+	font: {
+		fontFamily: "OpenSans-Bold",
+		fontSize: 10
+	},
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	zIndex: 10
 }
