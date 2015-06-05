@@ -1,15 +1,26 @@
 var api	= require('themoviedb/themoviedb');	
 api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
 
+/**
+ * TheMovieDB API doesn't support custom pagination, it only answers with 20 results max.
+ * As we show three movies per row, we fill the rows and store the pending for the next time.
+ */
+var pendingMovies = {
+	'nowList': [],
+	'upComingList': [],
+	'popularList': [],
+	'searchList': []
+};
+
 $.nowTitle.text			= L('now_movies');
 $.upcomingTitle.text	= L('upcoming_movies');
 $.popularTitle.text		= L('popular_movies');
 
 refreshAll();
 
-function refreshNow(callback)      { if (OS_IOS) $.ptrNow.endRefreshing();      loadMovies('getNowPlaying', 'nowList',      callback); }
-function refreshUpcoming(callback) { if (OS_IOS) $.ptrUpcoming.endRefreshing(); loadMovies('getUpcoming',   'upComingList', callback); }
-function refreshPopular(callback)  { if (OS_IOS) $.ptrPopular.endRefreshing();  loadMovies('getPopular',    'popularList',  callback); }
+function refreshNow(callback)      { if (OS_IOS) $.ptrNow.endRefreshing();      pendingMovies.nowList = [];      loadMovies('getNowPlaying', 'nowList',      callback); }
+function refreshUpcoming(callback) { if (OS_IOS) $.ptrUpcoming.endRefreshing(); pendingMovies.upComingList = []; loadMovies('getUpcoming',   'upComingList', callback); }
+function refreshPopular(callback)  { if (OS_IOS) $.ptrPopular.endRefreshing();  pendingMovies.popularList = [];  loadMovies('getPopular',    'popularList',  callback); }
 
 function refreshAll() {
 	refreshNow(function(err) {
@@ -115,17 +126,6 @@ function search(page, callback) {
 	);
 };
 
-/**
- * TheMovieDB API doesn't support custom pagination, it only answers with 20 results max.
- * As we show three movies per row, we fill the rows and store the pending for the next time.
- */
-var pendingMovies = {
-	'nowList': [],
-	'upComingList': [],
-	'popularList': [],
-	'searchList': []
-};
-
 function buildList(list, response, append) {
 	$[list].removeAllChildren();
 	
@@ -139,6 +139,9 @@ function buildList(list, response, append) {
 	if (!_.isEmpty(pendingMovies[list])) {
 		response.results = pendingMovies[list].concat(response.results);
 	} 
+	
+	pendingMovies[list] = [];
+	
 	if (response.results.length % 3 > 0) {
 		pendingMovies[list] = _.rest(response.results, response.results.length - response.results.length % 3);
 		response.results = _.first(response.results, response.results.length - response.results.length % 3);
@@ -159,13 +162,6 @@ function buildList(list, response, append) {
 		else
 			rows.push(row);
 	}
-	/*_.each(response.results, function(m) {
-		var row = Widget.createController('row', m).getView();
-		if (append)
-			$.tableList.appendRow(row);
-		else
-			rows.push(row);
-	});*/
 	
 	!append && $[list].setData(rows);
 }
