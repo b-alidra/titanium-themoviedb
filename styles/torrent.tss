@@ -29,7 +29,7 @@
 "#torrent_size": {
 	left: "10dp",
 	width: "45dp",
-	color: Alloy.Globals.theme.list.infoColor,
+	color: Alloy.Globals.theme.list.infosColor,
 	font: {
 		fontSize: "8",
 		fontFamily: "OpenSans"
@@ -64,5 +64,6 @@
 		fontSize: "8",
 		fontFamily: "OpenSans"
 	},
+	color: Alloy.Globals.theme.list.infosColor,
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT
 }

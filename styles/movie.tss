@@ -1,6 +1,7 @@
 "Window": {
 	backgroundColor: "#FFFFFF",
-    layout: "absolute"
+    layout: "absolute",
+    navBarHidden: true
 },
 "Window[platform=ios]": {
     statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
@@ -10,7 +11,7 @@
 	top: 0,
 	left: 0,
 	right: 0,
-	bottom: "55dp"
+	bottom: "85dp"
 },
 "#backIcon": {
 	font: {
@@ -121,7 +122,7 @@
 },
 "#tabs": {
 	top: "10dp",
-	bottom: "35dp",
+	bottom: "5dp",
 	backgroundColor: "#FFFFFF",
 	 pagingControlColor: "#000000",
 	 pagingControlAlpha: "0.8",

@@ -28,6 +28,5 @@ for (var i = 0; i < args.length; i++) {
 function selectedMovie(e) {
 	var movie = Widget.createController('movie', e.source.movie_id).getView();
 	//movie.left = Ti.Platform.displayCaps.platformWidth;
-	movie.open();
-	movie.animate({ "left": 0, "duration" : 500 });
+	movie.open({ fullscreen: true });
 }

@@ -65,7 +65,7 @@ api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'im
 				$.trailersWrapper.add(Ti.UI.createWebView({
 				    url: 'http://www.youtube.com/embed/' + t.source + '?autoplay=1&autohide=1&cc_load_policy=0&color=white&controls=0&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0',
 				    enableZoomControls: false,
-				    scalesPageToFit: false,
+				    scalesPageToFit: true,
 				    scrollsToTop: false,
 				    showScrollbars: false
 				}));
@@ -94,15 +94,18 @@ $.tabs.addEventListener('scrollend', function(e) {
 		Alloy.Globals.loading.show(L('list_loading'), false);
 
 		t411.search({ term: movie.title, category: 631 }, function(err, response) {
-			if (err)
+			Alloy.Globals.loading.hide(); 
+
+			if (err) {
+				Ti.API.error(err);
 				return false;
+			}
 				
 			var rows = [];
 			underscore.each(response.torrents, function(t) {
 				rows.push(Widget.createController('torrent', t).getView());
 			});
 			$.torrentsList.setData(rows);
-			Alloy.Globals.loading.hide(); 
 		});
 	}
 });
