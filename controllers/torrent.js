@@ -9,7 +9,7 @@ $.torrent_leechers.text	= args.leechers + " Leechers";
 $.torrent_date.text		= L('added_on') + ' ' + args.added;
 $.fa.add($.icon, "fa-download");
 
-$.icon.addEventListener('click', function() {
+$.row.addEventListener('click', function() {
 	api.download(args.id, function(err, response) {
 		if(err)
 			alert('Impossible de télécharger ce torrent');
