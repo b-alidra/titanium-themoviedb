@@ -1,37 +1,46 @@
 <Alloy>
 	<Window id="win">
 		<View class="vgroup" id="wrapper">
-			<ImageView id="headerImage"></ImageView>
-			<View class="hgroup" id="voteRow">
-				<Label id="heartIcon" class="fa-icon" icon="fa-heart"/>
-				<Label id="score"></Label>
-				<Label id="nbVotes"></Label>
-				<Label id="votes"></Label>
+			<View class="abs">
+				<ImageView id="headerImage"></ImageView>
+				<View class="hgroup" id="voteRow">
+					<Label id="heartIcon" class="fa-icon" icon="fa-heart"/>
+					<Label id="score"></Label>
+					<Label id="nbVotes"></Label>
+					<Label id="votes"></Label>
+				</View>
+				<View class="hgroup" id="infosWrapper">
+					<Label id="title"></Label>
+				</View>
 			</View>
 			<View class="abs" id="posterWrapper">
 				<ImageView id="poster"></ImageView>
+				<!--
 				<Button id="downloadButton" class="hgroup">
 					<Label id="downloadButtonIcon" class="fa-icon" icon="fa-download"/>
 					<Label id="downloadButtonText"/>
 				</Button>
+				-->
 			</View>
-			<View class="vgroup">
-				<View class="hgroup" id="infosWrapper">
-					<Label id="title"></Label>
-					<Label id="year"></Label>
-				</View>
-				<Label id="genres"></Label>
-			</View>
-			<ScrollableView id="tabs" showPagingControl="true">
+			<Label id="year"></Label>
+			<Label id="genres"></Label>
+			<ScrollableView id="tabs">
 				<View id="trailersWrapper" class="vgroup">
+					<View class="hsep" />
 					<Label id="trailersTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<View id="trailer" />
 				</View>
 				<View id="overviewWrapper" class="vgroup">
+					<View class="hsep" />
 					<Label id="synopsisTitle" class="tabsTitle"/>
+					<View class="hsep" />
 					<TextArea id="overview"></TextArea>
 				</View>
 				<View id="torrentsWrapper" class="vgroup">
+					<View class="hsep" />
 					<Label id="torrentsTitle" class="tabsTitle"/>
+					<View class="hsep" />
 					<TableView id="torrentsList" />
 				</View>
 			</ScrollableView>

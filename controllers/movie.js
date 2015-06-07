@@ -12,7 +12,7 @@ var movie;
 
 Alloy.Globals.loading.show(L('list_loading'), false);
 
-$.downloadButtonText.text	= L('download');
+//$.downloadButtonText.text	= L('download');
 $.votes.text				= L('votes').toUpperCase();
 $.trailersTitle.text		= L('trailer');
 $.synopsisTitle.text		= L('synopsis');
@@ -24,8 +24,14 @@ api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'im
 			return false;
 		
 		movie = JSON.parse(response);
-		Ti.API.info(movie);
-		$.headerImage.image	= api.common.getImage({'size': 'w500', 'file': movie.backdrop_path});
+		
+		if (underscore.isEmpty(movie.backdrop_path)) {
+			$.headerImage.image	= "backdrop.png";
+			$.infosWrapper.backgroundColor = "#0D000000";
+		}
+		else
+			$.headerImage.image	= api.common.getImage({'size': 'w500', 'file': movie.backdrop_path});
+			
 		$.poster.image		= api.common.getImage({'size': 'w300', 'file': movie.poster_path});
 		$.title.text		= movie.title;
 		$.year.text			= movie.release_date ? movie.release_date.substring(0, 4) : '';
@@ -50,7 +56,7 @@ api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'im
 				$.cast_images.add(Ti.UI.createImageView({
 					"class": "cast_image",
 					"image" : api.common.getImage({'size': 'w150', 'file': c["profile_path"]}),
-					"width": "50dp",
+					"width": Titanium.UI.SIZE,
 					"height": "80dp",
 					"right": "5dp",
 					"preventDefaultImage": true,
@@ -62,12 +68,14 @@ api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'im
 				
 		if (movie.trailers.youtube.length > 0) {
 			underscore.each(movie.trailers.youtube, function(t) {
-				$.trailersWrapper.add(Ti.UI.createWebView({
+				$.trailer.add(Ti.UI.createWebView({
 				    url: 'http://www.youtube.com/embed/' + t.source + '?autoplay=1&autohide=1&cc_load_policy=0&color=white&controls=0&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0',
 				    enableZoomControls: false,
 				    scalesPageToFit: true,
 				    scrollsToTop: false,
-				    showScrollbars: false
+				    showScrollbars: false,
+				    backgroundColor: "#000000",
+				    color: "#FFFFFF"
 				}));
 			});			
 		}
@@ -101,11 +109,18 @@ $.tabs.addEventListener('scrollend', function(e) {
 				return false;
 			}
 				
-			var rows = [];
-			underscore.each(response.torrents, function(t) {
-				rows.push(Widget.createController('torrent', t).getView());
+			if (underscore.isEmpty(response.torrents))
+				return false;
+				
+			/* Sort by seeders */
+			var sorted_torrents = underscore.sortBy(response.torrents, function(t) { return - parseInt(t.seeders); });
+			
+			underscore.each(sorted_torrents, function(t) {
+				/* We use appendRow and not setData so as to keep the list ordered ... */
+				$.torrentsList.appendRow(Widget.createController('torrent', t).getView());
 			});
-			$.torrentsList.setData(rows);
+			
+			$.torrentsList.animate( { opacity: 1, duration: 1000 });
 		});
 	}
 });
