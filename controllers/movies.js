@@ -35,8 +35,9 @@ function refreshAll() {
 }
 
 function refreshSearch() {
+	pendingMovies.searchList = [];
 	if (!_.isEmpty($.term.value))
-		search();
+		search(1);
 };
 var nowPage		 = 1,
 	upcomingPage = 1,
@@ -102,7 +103,7 @@ function loadMovies(type, list, callback, page) {
 function search(page, callback) {
 	Alloy.Globals.loading.show(L('list_loading'), false);
 	
-	page		= page || 1;
+	page		= parseInt(page) || 1;
 	searchPage	= page;
 	
 	api.search.getMovie({ query: $.term.value, page: page }, 
@@ -112,8 +113,9 @@ function search(page, callback) {
 			_.isFunction(callback) && callback(null);
 		},
 		function(err) {
+			Ti.API.info(err);
 			Alloy.Globals.loading.hide();
-			Alloy.createWidget("com.mcongrove.toast", null, {
+			Alloy.createWidget("com.mcongrove.toast", $.search_wrapper, {
 		    	text: L('cant_connect'),
 			    duration: 5000,
 			    view: $.tableList
