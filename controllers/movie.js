@@ -1,6 +1,10 @@
 var underscore  = require('alloy/underscore'),
 	api			= require('themoviedb/themoviedb'),
-	t411		= new (require('t411/t411'))();
+	config 		= require('t411/config'),
+	t411		= new (require('t411/t411'))(
+		Ti.App.Properties.getString('t411_username'),
+		Ti.App.Properties.getString('t411_password')
+	);
 	
 var TORRENTS_SLIDE_INDEX = 2;
 var TORRENTS_SLIDE_INDEX = 2;
