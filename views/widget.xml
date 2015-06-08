@@ -1,55 +1,54 @@
 <Alloy>
 	<View>
-		<View class="toolbar hgroup">
-			<View id="toolbar_stop_button_holder" class="toolbar_button_holder">
-				<Label id="toolbar_stop" class="toolbarButton fa-icon" icon="fa-pause"/>
-			</View>
-			<View id="toolbar_start_button_holder" class="toolbar_button_holder">
-				<Label id="toolbar_start" class="toolbarButton fa-icon" icon="fa-play"/>
-			</View>
-		</View>
 		<View id="content">
-			<TableView id="tableList">
-				<RefreshControl platform="ios" id="ptr" onRefreshstart="refresh"/>
-			</TableView>
+			<ScrollableView>
+				<View class="vgroup">
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="nowTitle" />
+						</View>
+					</View>
+					<TableView id="nowList" class="moviesList">
+						<RefreshControl platform="ios" id="ptrNow" onRefreshstart="refreshNow"/>
+						<Widget id="isNow" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreNow" />
+					</TableView>
+				</View>
+				<View class="vgroup">
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="upcomingTitle" />
+						</View>
+					</View>
+					<TableView id="upComingList" class="moviesList">
+						<RefreshControl platform="ios" id="ptrUpcoming" onRefreshstart="refreshUpcoming"/>
+						<Widget id="isUpcoming" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreUpcoming" />
+					</TableView>
+				</View>
+				<View class="vgroup">
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="popularTitle" />
+						</View>
+					</View>
+					<TableView id="popularList" class="moviesList">
+						<RefreshControl platform="ios" id="ptrPopular" onRefreshstart="refreshPopular"/>
+						<Widget id="isPopular" src="nl.fokkezb.infiniteScroll" onEnd="loadMorePopular" />
+					</TableView>
+				</View>
+				<View class="vgroup">
+					<View id="search_wrapper" class="hgroup">
+						<TextField id="term"/>
+						<Button id="search_button" onClick="search">
+							<Label id="search_button_icon" class="fa-icon" icon="fa-check"/>
+						</Button>
+					</View>
+					<TableView id="searchList" class="moviesList">
+						<RefreshControl platform="ios" id="ptrSearch" onRefreshstart="refreshSearch"/>
+						<Widget id="isSearch" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreSearch" />
+					</TableView>
+				</View>
+			</ScrollableView>
 		</View>
-		<View id="footer_bar" class="hgroup">
-			<View class="third vgroup">
-				<View class="hgroup">
-					<Label class="big blue" id="nb_torrents" />
-					<Label class="small" id="label_torrents" />
-				</View>
-				<View class="hgroup">
-					<Label class="big green" id="nb_active" />
-					<Label class="small" id="label_active" />
-				</View>	
-			</View>
-			<View class="third vgroup">
-				<View class="hgroup">
-					<Label class="big green fa-icon" icon="fa-long-arrow-down" />
-					<Label class="big green right" id="speed_download" />
-				</View>
-			</View>
-			<View class="third vgroup">
-				<View class="hgroup">
-					<Label class="big darkblue fa-icon" icon="fa-long-arrow-up" />
-					<Label class="big darkblue right" id="speed_upload" />
-				</View>
-			</View>
-	<!--		<View class="third vgroup">
-				<View class="hgroup	half">
-					<Label class="big darkblue fa-icon" icon="fa-long-arrow-up" />
-					<Label class="small darkblue left" id="size_uploaded" />
-				</View>
-				<View class="hgroup	half">
-					<Label class="big green fa-icon" icon="fa-long-arrow-down" />
-					<Label class="small green left" id="size_downloaded" />
-				</View>
-		</View>-->
-		</View>
-		<Button id="add_button">
-			<Label id="add_button_icon" class="fa-icon" icon="fa-plus"/>
-		</Button>
 		<Widget id="fa" src="com.mattmcfarland.fontawesome" debug="true"/>
 	</View>
 </Alloy>
