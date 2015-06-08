@@ -234,7 +234,9 @@
 	left: "5dp",
 	right: "5dp",
 	bottom: "5dp",
-	backgroundColor: "#000000"
+	backgroundColor: "#000000",
+	scrollType: "horizontal",
+	scrollingEnabled: true
 },
 "#cast_images": {
 	width: "2000dp",
