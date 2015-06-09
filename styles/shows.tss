@@ -1,51 +1,65 @@
 "#content": {
-	top: "48dp",
-	bottom: "5dp",
-	backgroundColor : Alloy.Globals.theme.movies.backgroundColor,
+	top: 0,
+	bottom: 0,
+	backgroundColor : Alloy.Globals.theme.shows.backgroundColor,
 	opacity: 0.95
 },
-"#tableList": {
-	top: 0,
+".showsList": {
+	top: "5dp",
 	width: "100%",
 	left: 0,
-	bottom: "40dp",
-	backgroundColor : Alloy.Globals.theme.movies.backgroundColor,
+	bottom: 0,
+	backgroundColor : Alloy.Globals.theme.shows.backgroundColor,
 	footerTitle: "",
-    separatorColor: Alloy.Globals.theme.movies.separatorColor
+    separatorColor: Alloy.Globals.theme.shows.separatorColor
 },
 "#ptr": {
-	tintColor: Alloy.Globals.theme.movies.refreshColor
-}, 
+	tintColor: Alloy.Globals.theme.shows.refreshColor
+},
+"#search_wrapper": {
+	backgroundColor: Alloy.Globals.theme.toolbar.backgroundColor,
+	top: 0,
+	left: 0,
+	height : "48dp",
+	viewShadowColor: Alloy.Globals.theme.toolbar.backgroundColor,
+    viewShadowOffset:{x:"0",y:"0"},
+    viewShadowRadius: Alloy.Globals.theme.toolbar.shadowRadius
+},
 "#term": {
-	height: Ti.UI.SIZE,
+	height: "30dp",
 	left: "5%",
-	right: '5%',
-	bottom: "5dp",
+	width: "75%",
+	top: "9dp",
 	font: {
 		fontSize: '16dp',
 		fontWeight: 'bold'
 	},
-	color: Alloy.Globals.theme.list.infosColor,
+	color: Alloy.Globals.theme.shows.searchTextColor,
+	backgroundColor: Alloy.Globals.theme.shows.searchBackgroundColor,
+	
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
 	hintText: L('your_search'),
+	borderRadius: 5,
+	paddingLeft: "5dp"
 },
-"#toolbar_title": { text: L('popular_shows') },
 "#search_button": {
-	width: "120dp",
-	height: "120dp",
-	center: {
+	left: "5%",
+	width: "10%",
+	height: "30dp",
+	top: "9dp",
+	/*center: {
 		x: "100%",
 		y: "100%"
-	},
+	},*/
 	backgroundColor: Alloy.Globals.theme.buttons.search.backgroundColor,
 	backgroundFocusedColor: Alloy.Globals.theme.buttons.search.backgroundFocusedColor,
-	borderRadius: 60
+	borderRadius: 5
 },
 "#search_button_icon": {
 	color: Alloy.Globals.theme.buttons.search.color,
-	font: { fontSize: 36 },
+	font: { fontSize: 16 },
 	center: {
-		x: "30%",
-		y: "30%"
+		x: "50%",
+		y: "50%"
 	}
 }

@@ -1,0 +1,18 @@
+<Alloy>
+	<TableViewRow id="row" class="row">
+		<View class="hgroup" id="rowWrapper">
+			<View class="bannerWrapper" layout="absolute">
+				<Label id="bannerTitle1" class="bannerTitle" />
+				<ImageView id="banner1" class="banner" onClick="selectedMovie"></ImageView>
+			</View>
+			<View class="bannerWrapper" layout="absolute">
+				<Label id="bannerTitle2" class="bannerTitle" />
+				<ImageView id="banner2" class="banner" onClick="selectedMovie"></ImageView>
+			</View>
+			<View class="bannerWrapper" layout="absolute">
+				<Label id="bannerTitle3" class="bannerTitle" />
+				<ImageView id="banner3" class="banner" onClick="selectedMovie"></ImageView>
+			</View>
+		</View>
+	</TableViewRow>
+</Alloy>

@@ -1,0 +1,12 @@
+<Alloy>
+	<TableViewRow id="row" class="row">
+		<View class="hgroup" id="rowWrapper">
+			<ImageView id="poster" class="banner" onClick="selectedSeason"></ImageView>
+			<View class="abs" id="infos">
+				<Label id="title" />
+				<Label id="nb_pisodes" />
+				<Label id="air_date" />
+			</View>
+		</View>
+	</TableViewRow>
+</Alloy>

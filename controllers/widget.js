@@ -54,26 +54,6 @@ function loadMoreUpcoming(e) { loadMovies('getUpcoming', 'upComingList', functio
 function loadMorePopular(e) { loadMovies('getPopular', 'popularList', function(err) { (e[err ? 'error' : 'success'])(); }, ++popularPage); }
 function loadMoreSearch(e) { search(++searchPage, function(err) { (e[err ? 'error' : 'success'])(); }); }
 
-function next() {
-	tkt_api.next(function(err, response) {
-		
-		if (err) {
-			Alloy.Globals.loading.hide();
-			Alloy.createWidget("com.mcongrove.toast", null, {
-		    	text: L('cant_connect'),
-			    duration: 5000,
-			    view: $.tableList
-			});
-			
-			return false;
-		}
-		
-		buildList(response, true);
-		
-		Alloy.Globals.loading.hide();
-	});
-}
-
 function loadMovies(type, list, callback, page) {
 	Alloy.Globals.loading.show(L('list_loading'), false);
 	
@@ -157,7 +137,7 @@ function buildList(list, response, append) {
 				results.push(response.results[i + 2]);
 		}
 		
-		var row = Widget.createController('row', results).getView();
+		var row = Widget.createController('movie_row', results).getView();
 		
 		if (append)
 			$[list].appendRow(row);

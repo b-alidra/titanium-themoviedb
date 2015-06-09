@@ -1,89 +1,149 @@
-var tkt_api	= new (require(WPATH('api'))),
-	__ =		require('alloy/underscore');
+var api	= require('themoviedb/themoviedb');	
+api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
 
-refresh();
-
-var page = 1;
-
-function refresh() {
-	if (OS_IOS)
-		$.ptr.endRefreshing();
-	if (__.isEmpty($.term.value))
-		popular_shows();
-	else
-		search();
-}
-
-function next() { tkt_api.next(); }
-
-function popular_shows() {
-	Alloy.Globals.loading.show(L('list_loading'), false);
-	
-	$.toolbar_title.text = L('popular_shows');
-	
-	tkt_api.popular_shows(function(err, response) {
-		
-		$.tableList.removeAllChildren();
-		
-		if (err) {
-			Alloy.Globals.loading.hide();
-			Alloy.createWidget("com.mcongrove.toast", null, {
-		    	text: L('cant_connect'),
-			    duration: 5000,
-			    view: $.tableList
-			});
-			
-			return false;
-		}
-		
-		buildList(response);
-		
-		Alloy.Globals.loading.hide();
-	});
-}
-
-function search() {
-	Alloy.Globals.loading.show(L('list_loading'), false);
-	
-	$.toolbar_title.text = $.term.value;
-	
-	tkt_api.search($.term.value, 'show', function(err, response) {
-		
-		$.tableList.removeAllChildren();
-		
-		if (err) {
-			Alloy.Globals.loading.hide();
-			Alloy.createWidget("com.mcongrove.toast", null, {
-		    	text: L('cant_connect'),
-			    duration: 5000,
-			    view: $.tableList
-			});
-			
-			return false;
-		}
-		
-		buildList(response);
-		
-		Alloy.Globals.loading.hide();
-	});
+/**
+ * TheMovieDB API doesn't support custom pagination, it only answers with 20 results max.
+ * As we show three shows per row, we fill the rows and store the pending for the next time.
+ */
+var pendingShows = {
+	'nowList': [],
+	'upComingList': [],
+	'popularList': [],
+	'searchList': []
 };
 
-function buildList(response) {
-	if (__.isEmpty(response))
+$.nowTitle.text			= L('now_shows');
+$.upcomingTitle.text	= L('upcoming_shows');
+$.popularTitle.text		= L('popular_shows');
+
+refreshAll();
+
+function refreshNow(callback)      { if (OS_IOS) $.ptrNow.endRefreshing();      pendingShows.nowList = [];      loadShows('getOnTheAir', 'nowList',      callback); }
+function refreshUpcoming(callback) { if (OS_IOS) $.ptrUpcoming.endRefreshing(); pendingShows.upComingList = []; loadShows('getAiringToday',   'upComingList', callback); }
+function refreshPopular(callback)  { if (OS_IOS) $.ptrPopular.endRefreshing();  pendingShows.popularList = [];  loadShows('getPopular',    'popularList',  callback); }
+
+function refreshAll() {
+	refreshNow(function(err) {
+		if (err)
+			return false;
+		refreshUpcoming(function(err) {
+			if (err)
+				return false;
+			refreshPopular();
+		});
+	});
+}
+
+function refreshSearch() {
+	pendingShows.searchList = [];
+	if (!_.isEmpty($.term.value))
+		search(1);
+};
+var nowPage		 = 1,
+	upcomingPage = 1,
+	popularPage  = 1,
+	searchPage	 = 1;
+
+$.isNow.init($.nowList);
+$.isUpcoming.init($.upComingList);
+$.isPopular.init($.popularList);
+$.isSearch.init($.searchList);
+
+function loadMoreNow(e) { loadShows('getOnTheAir', 'nowList', function(err) { (e[err ? 'error' : 'success'])(); }, ++nowPage); }
+function loadMoreUpcoming(e) { loadShows('getAiringToday', 'upComingList', function(err) { (e[err ? 'error' : 'success'])(); }, ++upcomingPage); }
+function loadMorePopular(e) { loadShows('getPopular', 'popularList', function(err) { (e[err ? 'error' : 'success'])(); }, ++popularPage); }
+function loadMoreSearch(e) { search(++searchPage, function(err) { (e[err ? 'error' : 'success'])(); }); }
+
+function loadShows(type, list, callback, page) {
+	Alloy.Globals.loading.show(L('list_loading'), false);
+	
+	page = page || 1;
+	
+	api.tv[type]({'language': 'fr', 'include_adult': false, 'page': page, 'include_image_language': 'fr, en,null'},
+		function(response) {
+			buildList(list, response, page > 1);
+			Alloy.Globals.loading.hide();
+			_.isFunction(callback) && callback(null);
+		},
+		function(err) {
+			Alloy.Globals.loading.hide();
+			Alloy.createWidget("com.mcongrove.toast", null, {
+		    	text: L('cant_connect'),
+			    duration: 5000,
+			    view: $.tableList
+			});
+			
+			_.isFunction(callback) && callback({});
+			
+			return false;
+		}
+	);
+}
+
+function search(page, callback) {
+	Alloy.Globals.loading.show(L('list_loading'), false);
+	
+	page		= parseInt(page) || 1;
+	searchPage	= page;
+	
+	api.search.getTv({ query: $.term.value, page: page }, 
+		function(response) {
+			buildList('searchList', response, page > 1);
+			Alloy.Globals.loading.hide();
+			_.isFunction(callback) && callback(null);
+		},
+		function(err) {
+			Ti.API.info(err);
+			Alloy.Globals.loading.hide();
+			Alloy.createWidget("com.mcongrove.toast", $.search_wrapper, {
+		    	text: L('cant_connect'),
+			    duration: 5000,
+			    view: $.tableList
+			});
+			
+			_.isFunction(callback) && callback({});
+			
+			return false;
+		}
+	);
+};
+
+function buildList(list, response, append) {
+	$[list].removeAllChildren();
+	
+	if (_.isEmpty(response))
 		return false;
 		
+	response = JSON.parse(response);
+	if (_.isEmpty(response.results))
+		return false;
+		
+	if (!_.isEmpty(pendingShows[list])) {
+		response.results = pendingShows[list].concat(response.results);
+	} 
+	
+	pendingShows[list] = [];
+	
+	if (response.results.length % 3 > 0) {
+		pendingShows[list] = _.rest(response.results, response.results.length - response.results.length % 3);
+		response.results = _.first(response.results, response.results.length - response.results.length % 3);
+	}
 	var rows = [];
-	__.each(response, function(m) {
-		rows.push(Widget.createController('row', m).getView());
-	});
+	for (var i = 0; i < response.results.length; i += 3) {
+		var results = [response.results[i]];
+		if (response.results[i + 1]) {
+			results.push(response.results[i + 1]);
+			if (response.results[i + 2])
+				results.push(response.results[i + 2]);
+		}
+		
+		var row = Widget.createController('show_row', results).getView();
+		
+		if (append)
+			$[list].appendRow(row);
+		else
+			rows.push(row);
+	}
 	
-	var row = Ti.UI.createTableViewRow();
-	var b   = Ti.UI.createButton({
-		text: L('load_more')
-	});
-	b.addEventListener('click', next);
-	row.add(b);
-	rows.push(row);
-	
-	$.tableList.setData(rows);
+	!append && $[list].setData(rows);
 }

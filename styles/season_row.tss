@@ -1,0 +1,64 @@
+"#row": {
+	backgroundColor: Alloy.Globals.theme.season.rowBackgroundColor,
+	selectedBackgroundColor: Alloy.Globals.theme.season.separatorColor,
+	height: Titanium.UI.SIZE,
+	borderWidth: 1,
+	borderColor: Alloy.Globals.theme.season.separatorColor,
+	left: 0
+},
+"#poster": {
+	opacity: 0,
+	top: "5dp",
+	left: 0,
+	height: "50dp",
+	bottom: "5dp",
+	width: Titanium.UI.SIZE,
+	preventDefaultImage: true,
+	viewShadowColor: Alloy.Globals.theme.season.banner.shadowColor,
+    viewShadowOffset:{x:"0",y:"0"},
+    viewShadowRadius: Alloy.Globals.theme.season.banner.shadowRadius
+},
+"#infos": {
+	top: "5dp",
+	left: 0,
+	right: 0,
+	bottom: "5dp",
+	height: "50dp"
+},
+"#title": {
+	top: "2dp",
+	left: "10dp",
+	right: "10dp",
+	height: Ti.UI.SIZE,
+	color: Alloy.Globals.theme.season.titleColor,
+	backgroundColor: Alloy.Globals.theme.season.titleBackgroundColor,
+	font: {
+		fontFamily: "OpenSans-Bold",
+		fontSize: '13dp'
+	}
+},
+"#nb_pisodes": {
+	bottom: "2dp",
+	left: "10dp",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	color: Alloy.Globals.theme.season.infoColor,
+	backgroundColor: Alloy.Globals.theme.season.infoBackgroundColor,
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: 10
+	}
+},
+"#air_date": {
+	bottom: "2dp",
+	right: "10dp",
+	height: Ti.UI.SIZE,
+	width: Ti.UI.SIZE,
+	color: Alloy.Globals.theme.season.dateColor,
+	backgroundColor: Alloy.Globals.theme.season.dateBackgroundColor,
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: 10
+	},
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT
+}

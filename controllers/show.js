@@ -6,54 +6,63 @@ var underscore  = require('alloy/underscore'),
 		Ti.App.Properties.getString('t411_password')
 	);
 	
-var TORRENTS_SLIDE_INDEX = 2;
+var TORRENTS_SLIDE_INDEX = 3;
 
 api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
 
-var movie_id = arguments[0] || {};
-var movie;
+var show_id = arguments[0] || {};
+var show;
 
 Alloy.Globals.loading.show(L('list_loading'), false);
 
 //$.downloadButtonText.text	= L('download');
 $.votes.text				= L('votes').toUpperCase();
-$.trailersTitle.text		= L('trailer');
+$.seasonsTitle.text			= L('seasons');
 $.synopsisTitle.text		= L('synopsis');
+$.trailersTitle.text		= L('trailer');
 $.torrentsTitle.text		= L('torrents');
 
-api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'images,trailers,credits', 'include_image_language': 'fr,en,null' },
+api.tv.getById({ 'id': show_id, 'language': 'fr', 'append_to_response': 'images,videos,credits', 'include_image_language': 'fr,en,null' },
 	function(response) {
 		if (underscore.isEmpty(response))
 			return false;
 		
-		movie = JSON.parse(response);
-		
-		if (underscore.isEmpty(movie.backdrop_path)) {
+		show = JSON.parse(response);
+		Ti.API.info(response);
+		if (underscore.isEmpty(show.backdrop_path)) {
 			$.headerImage.image	= "backdrop.png";
 			$.infosWrapper.backgroundColor = "#0D000000";
 		}
 		else
-			$.headerImage.image	= api.common.getImage({'size': 'w500', 'file': movie.backdrop_path});
+			$.headerImage.image	= api.common.getImage({'size': 'w500', 'file': show.backdrop_path});
 			
-		$.poster.image		= api.common.getImage({'size': 'w300', 'file': movie.poster_path});
-		$.title.text		= movie.title;
-		$.year.text			= movie.release_date ? movie.release_date.substring(0, 4) : '';
-		$.score.text		= movie.popularity ? parseInt(movie.popularity) + "%" : 0;
-		$.nbVotes.text		= movie.vote_count ? movie.vote_count : 0;
-		$.overview.value	= movie.overview;
+		$.poster.image		= api.common.getImage({'size': 'w300', 'file': show.poster_path});
+		$.title.text		= show.name;
+		$.year.text			= show.first_air_date ? show.first_air_date.substring(0, 4) : '';
+		$.score.text		= show.popularity ? parseInt(show.popularity) + "%" : 0;
+		$.nbVotes.text		= show.vote_count ? show.vote_count : 0;
+		$.overview.value	= show.overview;
 		
 		$.cast_images.width = 0;
 		
-		if (!underscore.isEmpty(movie.genres)) {
+		if (!underscore.isEmpty(show.genres)) {
 			var genres = [];
-			underscore.each(movie.genres, function(g) {
+			underscore.each(show.genres, function(g) {
 				genres.push(g.name);
 			});
 			$.genres.text = genres.join(' - ');
 		}
 		
+		var seasons = [];
+		underscore.each(show.seasons, function(s) {
+			if (underscore.isEmpty(s["poster_path"]))
+				return false;
+			seasons.push(Widget.createController('season_row', s).getView());
+		});
+		$.seasons.setData(seasons);		
+			
 		setTimeout(function() {
-			underscore.each(movie.credits.cast, function(c) {
+			underscore.each(show.credits.cast, function(c) {
 				if (underscore.isEmpty(c["profile_path"]))
 					return false;
 				$.cast_images.add(Ti.UI.createImageView({
@@ -69,17 +78,19 @@ api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'im
 			});
 		}, 1000);
 				
-		if (movie.trailers.youtube.length > 0) {
-			underscore.each(movie.trailers.youtube, function(t) {
-				$.trailer.add(Ti.UI.createWebView({
-				    url: 'http://www.youtube.com/embed/' + t.source + '?autoplay=1&autohide=1&cc_load_policy=0&color=white&controls=0&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0',
-				    enableZoomControls: false,
-				    scalesPageToFit: true,
-				    scrollsToTop: false,
-				    showScrollbars: false,
-				    backgroundColor: "#000000",
-				    color: "#FFFFFF"
-				}));
+		if (show.videos.length > 0) {
+			underscore.each(show.videos, function(t) {
+				if (t.site == "youtube") {
+					$.trailer.add(Ti.UI.createWebView({
+					    url: 'http://www.youtube.com/embed/' + t.key + '?autoplay=1&autohide=1&cc_load_policy=0&color=white&controls=0&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0',
+					    enableZoomControls: false,
+					    scalesPageToFit: true,
+					    scrollsToTop: false,
+					    showScrollbars: false,
+					    backgroundColor: "#000000",
+					    color: "#FFFFFF"
+					}));
+				}
 			});			
 		}
 		else {
@@ -104,7 +115,8 @@ $.tabs.addEventListener('scrollend', function(e) {
 		$.torrentsWrapper.hasLoadedTorrents = true;
 		Alloy.Globals.loading.show(L('list_loading'), false);
 
-		t411.search({ term: movie.title, category: 631 }, function(err, response) {
+		t411.search({ term: show.name, category: 631 }, function(err, response) {
+
 			if (err) {
 				Ti.API.error(err);
 				Alloy.Globals.loading.hide(); 

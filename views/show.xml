@@ -1,0 +1,54 @@
+<Alloy>
+	<Window id="win">
+		<View class="vgroup" id="wrapper">
+			<View class="abs">
+				<ImageView id="headerImage"></ImageView>
+				<View class="hgroup" id="voteRow">
+					<Label id="heartIcon" class="fa-icon" icon="fa-heart"/>
+					<Label id="score"></Label>
+					<Label id="nbVotes"></Label>
+					<Label id="votes"></Label>
+				</View>
+				<View class="hgroup" id="infosWrapper">
+					<Label id="title"></Label>
+				</View>
+			</View>
+			<View class="abs" id="posterWrapper">
+				<ImageView id="poster"></ImageView>
+			</View>
+			<Label id="year"></Label>
+			<Label id="genres"></Label>
+			<ScrollableView id="tabs">
+				<View id="seasonsWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="seasonsTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TableView id="seasons" />
+				</View>
+				<View id="overviewWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="synopsisTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TextArea id="overview"></TextArea>
+				</View>
+				<View id="trailersWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="trailersTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<View id="trailer" />
+				</View>
+				<View id="torrentsWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="torrentsTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TableView id="torrentsList" />
+				</View>
+			</ScrollableView>
+       	</View>
+		<ScrollView id="cast">
+			<View class="hgroup" id="cast_images" />
+		</ScrollView>
+		<Label id="backIcon" class="fa-icon" icon="fa-angle-left"/>
+		<Widget id="fa" src="com.mattmcfarland.fontawesome" debug="true"/>
+	</Window>
+</Alloy>

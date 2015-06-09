@@ -1,19 +1,54 @@
 <Alloy>
 	<View>
-		<View class="toolbar">
-			<View id="toolbar_title_holder">
-				<Label id="toolbar_title" />
-			</View>
-		</View>
 		<View id="content">
-			<TableView id="tableList">
-				<RefreshControl platform="ios" id="ptr" onRefreshstart="refresh"/>
-			</TableView>
-			<TextField id="term"/>
+			<ScrollableView>
+				<View class="vgroup">
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="nowTitle" />
+						</View>
+					</View>
+					<TableView id="nowList" class="showsList">
+						<RefreshControl platform="ios" id="ptrNow" onRefreshstart="refreshNow"/>
+						<Widget id="isNow" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreNow" />
+					</TableView>
+				</View>
+				<View class="vgroup">
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="upcomingTitle" />
+						</View>
+					</View>
+					<TableView id="upComingList" class="showsList">
+						<RefreshControl platform="ios" id="ptrUpcoming" onRefreshstart="refreshUpcoming"/>
+						<Widget id="isUpcoming" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreUpcoming" />
+					</TableView>
+				</View>
+				<View class="vgroup">
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="popularTitle" />
+						</View>
+					</View>
+					<TableView id="popularList" class="showsList">
+						<RefreshControl platform="ios" id="ptrPopular" onRefreshstart="refreshPopular"/>
+						<Widget id="isPopular" src="nl.fokkezb.infiniteScroll" onEnd="loadMorePopular" />
+					</TableView>
+				</View>
+				<View class="vgroup">
+					<View id="search_wrapper" class="hgroup">
+						<TextField id="term"/>
+						<Button id="search_button" onClick="search">
+							<Label id="search_button_icon" class="fa-icon" icon="fa-check"/>
+						</Button>
+					</View>
+					<TableView id="searchList" class="showsList">
+						<RefreshControl platform="ios" id="ptrSearch" onRefreshstart="refreshSearch"/>
+						<Widget id="isSearch" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreSearch" />
+					</TableView>
+				</View>
+			</ScrollableView>
 		</View>
-		<Button id="search_button" onClick="search">
-			<Label id="search_button_icon" class="fa-icon" icon="fa-check"/>
-		</Button>
 		<Widget id="fa" src="com.mattmcfarland.fontawesome" debug="true"/>
 	</View>
 </Alloy>
