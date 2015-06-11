@@ -1,0 +1,16 @@
+<Alloy>
+	<TableViewRow id="row" class="row" onClick="selectedEpisode">
+		<View class="hgroup" id="rowWrapper">
+			<ImageView id="poster" class="banner"></ImageView>
+			<View class="vgroup" id="infos">
+				<Label id="title" />
+				<View class="abs">
+					<Label id="episode_number" />
+					<Label id="air_date" />
+				</View>
+				<Label id="overview" />
+			</View>
+		</View>
+		<Widget id="fa" src="com.mattmcfarland.fontawesome" debug="true"/>
+	</TableViewRow>
+</Alloy>

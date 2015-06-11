@@ -11,7 +11,7 @@
 	top: 0,
 	left: 0,
 	right: 0,
-	bottom: "85dp"
+	bottom: 0
 },
 "#backIcon": {
 	font: {
@@ -89,7 +89,7 @@
 	backgroundColor: "#BF000000",
 	zIndex: 10
 }
-"#title": {
+"#show_name": {
 	left: "85dp",
 	right: "10dp",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
@@ -100,24 +100,56 @@
 	},
 	color: "#FFFFFF"
 },
-"#year": {
-	top: "-30dp",
-	right: "10dp",
+"#season_episode_date": { top: "-30dp", left: "85dp", right: "10dp" },
+"#date_icon": {
+	top: "2dp",
+	left: 0,
+	font: { fontSize: "8dp" },
+	color: Alloy.Globals.theme.episode.infoColor
+},
+"#episode_date": {
+	top: 0,
+	left: "10dp",
+	width: Ti.UI.SIZE,
 	font: {
-		fontSize: '14dp'
+		fontFamily: "OpenSans",
+		fontSize: '10dp'
+	},
+	color: "#FFFFFF",
+	color: Alloy.Globals.theme.episode.infoColor
+},
+"#season_episode": {
+	top: 0,
+	right: 0,
+	width: Ti.UI.SIZE,
+	font: {
+		fontSize: '10dp'
 	},
 	color: "#FFFFFF",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+	color: Alloy.Globals.theme.episode.infoColor
 },
-"#genres": {
+"#episode_airtime": {
+	top: "10dp",
+	left: "10dp",
+	width: Ti.UI.SIZE,
 	font: {
 		fontFamily: "OpenSans",
-		fontSize: '12dp'
+		fontSize: '10dp'
+	},
+	color: "#FFFFFF",
+	color: Alloy.Globals.theme.episode.infoColor
+},
+"#episode_name": {
+	font: {
+		fontFamily: "OpenSans-Bold",
+		fontSize: '14dp'
 	},
 	color: "#FFFFFF",
 	left: "85dp",
 	right: "10dp",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+	color: Alloy.Globals.theme.episode.titleColor
 },
 "#tabs": {
 	top: 0,
@@ -140,20 +172,6 @@
 	width: "100%",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
 	verticalAlign: Titanium.UI.TEXT_VERTICAL_ALIGNMENT_TOP
-},
-"#seasonsWrapper": {
-	backgroundColor: "#000000",
-	height: Titanium.UI.FILL
-},
-"#seasons": {
-	backgroundColor: Alloy.Globals.theme.season.backgroundColor,
-	backgroundSelectedColor: Alloy.Globals.theme.season.selectedRowBackgroundColor,
-	separatorColor: Alloy.Globals.theme.season.separatorColor,
-	top: "10dp",
-	left: "10dp",
-	right: "10dp",
-	bottom: 0,
-	footerTitle: ""
 },
 "#overviewWrapper": {
 	backgroundColor: "#000000",
@@ -181,7 +199,7 @@
 	height: Titanium.UI.FILL
 },
 "#torrentsList": {
-	top: 0,
+	top: "5dp",
 	left: 0,
 	right: "15dp",
 	bottom: 0,
@@ -189,25 +207,6 @@
 	footerTitle: "",
     separatorColor: Alloy.Globals.theme.torrents.separatorColor,
     opacity: 0
-}
-"#heartIcon": {
-	font: { fontSize: '10dp' },
-	color: "#FFFFFF"
-},
-"#score": {
-	font: { fontSize: '10dp' },
-	color: "#FFFFFF",
-	left: "2dp"
-},
-"#nbVotes": {
-	font: { fontSize: '10dp' },
-	color: "#FFFFFF",
-	left: "5dp"
-},
-"#votes": {
-	font: { fontSize: '10dp' },
-	color: "#999999",
-	left: "2dp"
 },
 "#cast": {
 	contentWidth: 'auto',

@@ -1,0 +1,79 @@
+"#row": {
+	backgroundColor: Alloy.Globals.theme.episode.rowBackgroundColor,
+	selectedBackgroundColor: Alloy.Globals.theme.episode.separatorColor,
+	height: Titanium.UI.SIZE
+},
+"#rowWrapper": { touchEnabled: false  },
+"#poster": {
+	top: "5dp",
+	left: "0dp",
+	height: "50dp",
+	bottom: "5dp",
+	width: Titanium.UI.SIZE,
+	preventDefaultImage: true,
+	viewShadowColor: Alloy.Globals.theme.episode.banner.shadowColor,
+    viewShadowOffset:{x:"0",y:"0"},
+    viewShadowRadius: Alloy.Globals.theme.episode.banner.shadowRadius,
+    touchEnabled: false
+},
+"#infos": {
+	top: "2dp",
+	left: 0,
+	right: 0,
+	bottom: "2dp",
+	height: "50dp",
+    touchEnabled: false
+},
+"#title": {
+	top: 0,
+	left: "10dp",
+	right: 0,
+	height: Ti.UI.SIZE,
+	color: Alloy.Globals.theme.episode.titleColor,
+	backgroundColor: Alloy.Globals.theme.episode.titleBackgroundColor,
+	font: {
+		fontFamily: "OpenSans-Bold",
+		fontSize: '10dp'
+	},
+    touchEnabled: false
+},
+"#episode_number": {
+	top: 0,
+	left: "10dp",
+	height: Ti.UI.SIZE,
+	color: Alloy.Globals.theme.episode.titleColor,
+	backgroundColor: Alloy.Globals.theme.episode.titleBackgroundColor,
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: '10dp'
+	},
+    touchEnabled: false
+},
+"#air_date": {
+	top: 0,
+	right: 0,
+	height: Ti.UI.SIZE,
+	color: Alloy.Globals.theme.episode.titleColor,
+	backgroundColor: Alloy.Globals.theme.episode.titleBackgroundColor,
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: '10dp'
+	},
+    touchEnabled: false
+},
+"#overview": {
+	top: 0,
+	left: "10dp",
+	right: 0,
+	bottom: 0,
+	wordWrap: false,
+	ellipsize: true,
+	width: Ti.UI.FILL,
+	color: Alloy.Globals.theme.episode.infoColor,
+	backgroundColor: Alloy.Globals.theme.episode.infoBackgroundColor,
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: '10dp'
+	},
+    touchEnabled: false
+}

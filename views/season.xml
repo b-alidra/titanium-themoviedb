@@ -1,0 +1,45 @@
+<Alloy>
+	<Window id="win">
+		<View class="vgroup" id="wrapper">
+			<View class="abs">
+				<ImageView id="headerImage"></ImageView>
+				<View class="hgroup" id="voteRow">
+					<Label id="heartIcon" class="fa-icon" icon="fa-heart"/>
+					<Label id="score"></Label>
+					<Label id="nbVotes"></Label>
+					<Label id="votes"></Label>
+				</View>
+				<View class="hgroup" id="infosWrapper">
+					<Label id="title"></Label>
+				</View>
+			</View>
+			<View class="abs" id="posterWrapper">
+				<ImageView id="poster"></ImageView>
+			</View>
+			<Label id="year"></Label>
+			<Label id="genres"></Label>
+			<ScrollableView id="tabs">
+				<View id="episodesWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="episodesTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TableView id="episodes" />
+				</View>
+				<View id="overviewWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="synopsisTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TextArea id="overview"></TextArea>
+				</View>
+				<View id="torrentsWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="torrentsTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TableView id="torrentsList" />
+				</View>
+			</ScrollableView>
+       	</View>
+		<Label id="backIcon" class="fa-icon" icon="fa-angle-left"/>
+		<Widget id="fa" src="com.mattmcfarland.fontawesome" debug="true"/>
+	</Window>
+</Alloy>

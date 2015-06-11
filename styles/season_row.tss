@@ -6,6 +6,7 @@
 	borderColor: Alloy.Globals.theme.season.separatorColor,
 	left: 0
 },
+"#rowWrapper": { touchEnabled: false  },
 "#poster": {
 	opacity: 0,
 	top: "5dp",
@@ -16,14 +17,16 @@
 	preventDefaultImage: true,
 	viewShadowColor: Alloy.Globals.theme.season.banner.shadowColor,
     viewShadowOffset:{x:"0",y:"0"},
-    viewShadowRadius: Alloy.Globals.theme.season.banner.shadowRadius
+    viewShadowRadius: Alloy.Globals.theme.season.banner.shadowRadius,
+    touchEnabled: false
 },
 "#infos": {
 	top: "5dp",
 	left: 0,
 	right: 0,
 	bottom: "5dp",
-	height: "50dp"
+	height: "50dp",
+    touchEnabled: false
 },
 "#title": {
 	top: "2dp",
@@ -35,7 +38,8 @@
 	font: {
 		fontFamily: "OpenSans-Bold",
 		fontSize: '13dp'
-	}
+	},
+    touchEnabled: false
 },
 "#nb_pisodes": {
 	bottom: "2dp",
@@ -47,7 +51,8 @@
 	font: {
 		fontFamily: "OpenSans",
 		fontSize: 10
-	}
+	},
+    touchEnabled: false
 },
 "#air_date": {
 	bottom: "2dp",
@@ -60,5 +65,6 @@
 		fontFamily: "OpenSans",
 		fontSize: 10
 	},
-	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+    touchEnabled: false
 }

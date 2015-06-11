@@ -11,7 +11,7 @@
 	top: 0,
 	left: 0,
 	right: 0,
-	bottom: "85dp"
+	bottom: 0
 },
 "#backIcon": {
 	font: {
@@ -57,6 +57,36 @@
 	width: Titanium.UI.SIZE,
 	height: "100dp",
 	zIndex: 10
+},
+"#downloadButton": {
+	right: 0,
+	bottom: "15dp",
+	borderWidth: 1,
+	borderColor: "#FC4545",
+	borderRadius: 4,
+	color: "#FC4545",
+	backgroundColor: "#FFFFFF",
+	height: "24dp",
+	width: "80dp",
+	textAlign: "center"
+},
+"#downloadButtonIcon": {
+	font: {
+		fontSize: '10dp',
+		fontWeight: 'bold'
+	},
+	color: "#FC4545",
+	top: "6dp",
+	left: "5dp"
+},
+"#downloadButtonText": {
+	font: {
+		fontSize: '10dp',
+		fontWeight: 'bold'
+	},
+	color: "#FC4545",
+	top: "5dp",
+	left: "5dp"
 },
 /*
  Alpha Level	HEX Code
@@ -141,15 +171,15 @@
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
 	verticalAlign: Titanium.UI.TEXT_VERTICAL_ALIGNMENT_TOP
 },
-"#seasonsWrapper": {
+"#episodesWrapper": {
 	backgroundColor: "#000000",
 	height: Titanium.UI.FILL
 },
-"#seasons": {
-	backgroundColor: Alloy.Globals.theme.season.backgroundColor,
-	backgroundSelectedColor: Alloy.Globals.theme.season.selectedRowBackgroundColor,
-	separatorColor: Alloy.Globals.theme.season.separatorColor,
-	top: "10dp",
+"#episodes": {
+	backgroundColor: Alloy.Globals.theme.episode.backgroundColor,
+	backgroundSelectedColor: Alloy.Globals.theme.episode.selectedRowBackgroundColor,
+	separatorColor: Alloy.Globals.theme.episode.separatorColor,
+	top: 0,
 	left: "10dp",
 	right: "10dp",
 	bottom: 0,
@@ -208,30 +238,4 @@
 	font: { fontSize: '10dp' },
 	color: "#999999",
 	left: "2dp"
-},
-"#cast": {
-	contentWidth: 'auto',
-	contentHeight: 'auto',
-	showVerticalScrollIndicator: true,
-	showHorizontalScrollIndicator: true,
-	height: '80dp',
-	left: "5dp",
-	right: "5dp",
-	bottom: "5dp",
-	backgroundColor: "#000000",
-	scrollType: "horizontal",
-	scrollingEnabled: true
-},
-"#cast_images": {
-	width: "2000dp",
-	height: "80dp"
-},
-".cast_image": {
-	width: "50dp",
-	height: "80dp",
-	left: "5dp",
-	preventDefaultImage: true,
-	borderRadius: 0,
-	borderWidth: 2,
-	borderColor: "#FFFFFF"
 }

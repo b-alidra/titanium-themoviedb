@@ -58,36 +58,6 @@
 	height: "100dp",
 	zIndex: 10
 },
-"#downloadButton": {
-	right: 0,
-	bottom: "15dp",
-	borderWidth: 1,
-	borderColor: "#FC4545",
-	borderRadius: 4,
-	color: "#FC4545",
-	backgroundColor: "#FFFFFF",
-	height: "24dp",
-	width: "80dp",
-	textAlign: "center"
-},
-"#downloadButtonIcon": {
-	font: {
-		fontSize: '10dp',
-		fontWeight: 'bold'
-	},
-	color: "#FC4545",
-	top: "6dp",
-	left: "5dp"
-},
-"#downloadButtonText": {
-	font: {
-		fontSize: '10dp',
-		fontWeight: 'bold'
-	},
-	color: "#FC4545",
-	top: "5dp",
-	left: "5dp"
-},
 /*
  Alpha Level	HEX Code
 100%			FF

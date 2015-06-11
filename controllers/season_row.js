@@ -1,13 +1,18 @@
-var __  = require('alloy/underscore'),
-	api	= require('themoviedb/themoviedb');
+var __  	= require('alloy/underscore'),
+	moment  = require('alloy/moment'),
+	api		= require('themoviedb/themoviedb');
 
 var arg = arguments[0] || {};
 
-$.poster.image		= api.common.getImage({'size': 'w300', 'file': arg.poster_path});
-$.poster.show_id	= arg.id;
-$.title.text		= L('season') + ' ' + arg.season_number;
-$.nb_pisodes.text	= arg.episode_count + ' ' + L('episodes');
-$.air_date.text		= L('since') + ' ' + arg.air_date;
+$.row.show_name			= arg.show_name;
+$.row.show_backdrop		= arg.show_backdrop;
+$.row.show_id			= arg.show_id;
+$.row.season_number		= arg.season_number;
+
+$.poster.image			= api.common.getImage({'size': 'w300', 'file': arg.poster_path});
+$.title.text			= L('season') + ' ' + arg.season_number;
+$.nb_pisodes.text		= arg.episode_count + ' ' + L('episodes');
+$.air_date.text			= moment(arg.air_date).format(L('date_format'));
 
 $.poster.addEventListener('load', function() {
 	this.animate({
@@ -17,6 +22,14 @@ $.poster.addEventListener('load', function() {
 });
 
 function selectedSeason(e) {
-	var movie = Widget.createController('season', e.source.show_id).getView();
-	movie.open({ fullscreen: true });
+	var options = {
+		"show_name": e.source.show_name,
+		"id": e.source.show_id,
+		"season_number": e.source.season_number,
+		"show_backdrop": e.source.show_backdrop
+	};
+
+	Widget.createController('season', options)
+		.getView()
+		.open({ fullscreen: true });
 }

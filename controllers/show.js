@@ -55,8 +55,9 @@ api.tv.getById({ 'id': show_id, 'language': 'fr', 'append_to_response': 'images,
 		
 		var seasons = [];
 		underscore.each(show.seasons, function(s) {
-			if (underscore.isEmpty(s["poster_path"]))
-				return false;
+			s.show_name		= show.name;
+			s.show_id		= show.id;
+			s.show_backdrop = show.backdrop_path;
 			seasons.push(Widget.createController('season_row', s).getView());
 		});
 		$.seasons.setData(seasons);		

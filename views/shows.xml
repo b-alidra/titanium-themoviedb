@@ -5,23 +5,23 @@
 				<View class="vgroup">
 					<View class="toolbar">
 						<View class="toolbar_title_holder">
+							<Label class="toolbar_title" id="todayTitle" />
+						</View>
+					</View>
+					<TableView id="todayList" class="showsList">
+						<RefreshControl platform="ios" id="ptrToday" onRefreshstart="refreshToday"/>
+						<Widget id="isToday" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreToday" />
+					</TableView>
+				</View>
+				<View class="vgroup">
+					<View class="toolbar">
+						<View class="toolbar_title_holder">
 							<Label class="toolbar_title" id="nowTitle" />
 						</View>
 					</View>
 					<TableView id="nowList" class="showsList">
 						<RefreshControl platform="ios" id="ptrNow" onRefreshstart="refreshNow"/>
 						<Widget id="isNow" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreNow" />
-					</TableView>
-				</View>
-				<View class="vgroup">
-					<View class="toolbar">
-						<View class="toolbar_title_holder">
-							<Label class="toolbar_title" id="upcomingTitle" />
-						</View>
-					</View>
-					<TableView id="upComingList" class="showsList">
-						<RefreshControl platform="ios" id="ptrUpcoming" onRefreshstart="refreshUpcoming"/>
-						<Widget id="isUpcoming" src="nl.fokkezb.infiniteScroll" onEnd="loadMoreUpcoming" />
 					</TableView>
 				</View>
 				<View class="vgroup">

@@ -6,27 +6,27 @@ api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
  * As we show three shows per row, we fill the rows and store the pending for the next time.
  */
 var pendingShows = {
+	'todayList': [],
 	'nowList': [],
-	'upComingList': [],
 	'popularList': [],
 	'searchList': []
 };
 
-$.nowTitle.text			= L('now_shows');
-$.upcomingTitle.text	= L('upcoming_shows');
-$.popularTitle.text		= L('popular_shows');
+$.todayTitle.text	= L('today_shows');
+$.nowTitle.text		= L('now_shows');
+$.popularTitle.text	= L('popular_shows');
 
 refreshAll();
 
+function refreshToday(callback) { if (OS_IOS) $.ptrToday.endRefreshing(); pendingShows.todayList = []; loadShows('getAiringToday',   'todayList', callback); }
 function refreshNow(callback)      { if (OS_IOS) $.ptrNow.endRefreshing();      pendingShows.nowList = [];      loadShows('getOnTheAir', 'nowList',      callback); }
-function refreshUpcoming(callback) { if (OS_IOS) $.ptrUpcoming.endRefreshing(); pendingShows.upComingList = []; loadShows('getAiringToday',   'upComingList', callback); }
 function refreshPopular(callback)  { if (OS_IOS) $.ptrPopular.endRefreshing();  pendingShows.popularList = [];  loadShows('getPopular',    'popularList',  callback); }
 
 function refreshAll() {
-	refreshNow(function(err) {
+	refreshToday(function(err) {
 		if (err)
 			return false;
-		refreshUpcoming(function(err) {
+		refreshNow(function(err) {
 			if (err)
 				return false;
 			refreshPopular();
@@ -40,17 +40,17 @@ function refreshSearch() {
 		search(1);
 };
 var nowPage		 = 1,
-	upcomingPage = 1,
+	todayPage 	 = 1,
 	popularPage  = 1,
 	searchPage	 = 1;
 
 $.isNow.init($.nowList);
-$.isUpcoming.init($.upComingList);
+$.isToday.init($.todayList);
 $.isPopular.init($.popularList);
 $.isSearch.init($.searchList);
 
 function loadMoreNow(e) { loadShows('getOnTheAir', 'nowList', function(err) { (e[err ? 'error' : 'success'])(); }, ++nowPage); }
-function loadMoreUpcoming(e) { loadShows('getAiringToday', 'upComingList', function(err) { (e[err ? 'error' : 'success'])(); }, ++upcomingPage); }
+function loadMoreToday(e) { loadShows('getAiringToday', 'todayList', function(err) { (e[err ? 'error' : 'success'])(); }, ++todayPage); }
 function loadMorePopular(e) { loadShows('getPopular', 'popularList', function(err) { (e[err ? 'error' : 'success'])(); }, ++popularPage); }
 function loadMoreSearch(e) { search(++searchPage, function(err) { (e[err ? 'error' : 'success'])(); }); }
 

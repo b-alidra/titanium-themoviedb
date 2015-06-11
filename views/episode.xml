@@ -1,0 +1,37 @@
+<Alloy>
+	<Window id="win">
+		<View class="vgroup" id="wrapper">
+			<View class="abs">
+				<ImageView id="headerImage"></ImageView>
+				<View class="hgroup" id="infosWrapper">
+					<Label id="show_name"></Label>
+				</View>
+			</View>
+			<View class="abs" id="posterWrapper">
+				<ImageView id="poster"></ImageView>
+			</View>
+			<View class="abs" id="season_episode_date">
+				<Label id="date_icon" class="fa-icon icon" icon="fa-calendar-o"></Label>
+				<Label id="episode_date"></Label>
+				<Label id="season_episode"></Label>
+			</View>
+			<Label id="episode_name"></Label>
+			<ScrollableView id="tabs">
+				<View id="overviewWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="synopsisTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TextArea id="overview"></TextArea>
+				</View>
+				<View id="torrentsWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="torrentsTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TableView id="torrentsList" />
+				</View>
+			</ScrollableView>
+       	</View>
+		<Label id="backIcon" class="fa-icon" icon="fa-angle-left"/>
+		<Widget id="fa" src="com.mattmcfarland.fontawesome" debug="true"/>
+	</Window>
+</Alloy>
