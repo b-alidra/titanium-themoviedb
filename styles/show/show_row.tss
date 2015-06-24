@@ -22,10 +22,10 @@
 },
 ".bannerTitle": {
 	opacity: 0,
-	top: "7dp",
-	left: "4dp",
-	right: "7dp",
-	backgroundColor: "#000000",
+	top: "15dp",
+	left: "5dp",
+	right: "5dp",
+	backgroundColor: "transparent",
 	opacity: 0.75,
 	color: "#FFFFFF",
 	font: {

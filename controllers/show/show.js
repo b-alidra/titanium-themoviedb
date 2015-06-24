@@ -1,4 +1,4 @@
-var underscore  = require('alloy/underscore'),
+var moment		= require('alloy/moment'),
 	api			= require('themoviedb/themoviedb'),
 	config 		= require('t411/config'),
 	t411		= new (require('t411/t411'))(
@@ -24,12 +24,12 @@ $.torrentsTitle.text		= L('torrents');
 
 api.tv.getById({ 'id': show_id, 'language': 'fr', 'append_to_response': 'images,videos,credits', 'include_image_language': 'fr,en,null' },
 	function(response) {
-		if (underscore.isEmpty(response))
+		if (_.isEmpty(response))
 			return false;
 		
 		show = JSON.parse(response);
 		Ti.API.info(response);
-		if (underscore.isEmpty(show.backdrop_path)) {
+		if (_.isEmpty(show.backdrop_path)) {
 			$.headerImage.image	= "backdrop.png";
 			$.infosWrapper.backgroundColor = "#0D000000";
 		}
@@ -38,49 +38,60 @@ api.tv.getById({ 'id': show_id, 'language': 'fr', 'append_to_response': 'images,
 			
 		$.poster.image		= api.common.getImage({'size': 'w300', 'file': show.poster_path});
 		$.title.text		= show.name;
-		$.year.text			= show.first_air_date ? show.first_air_date.substring(0, 4) : '';
+		$.year.text			= show.first_air_date ? moment(show.first_air_date).format(L('date_format')) : '';
 		$.score.text		= show.popularity ? parseInt(show.popularity) + "%" : 0;
 		$.nbVotes.text		= show.vote_count ? show.vote_count : 0;
 		$.overview.value	= show.overview;
 		
 		$.cast_images.width = 0;
 		
-		if (!underscore.isEmpty(show.genres)) {
+		if (!_.isEmpty(show.genres)) {
 			var genres = [];
-			underscore.each(show.genres, function(g) {
+			_.each(show.genres, function(g) {
 				genres.push(g.name);
 			});
 			$.genres.text = genres.join(' - ');
 		}
 		
 		var seasons = [];
-		underscore.each(show.seasons, function(s) {
+		_.each(show.seasons, function(s) {
 			s.show_name		= show.name;
 			s.show_id		= show.id;
 			s.show_backdrop = show.backdrop_path;
-			seasons.push(Widget.createController('season_row', s).getView());
+			seasons.push(Widget.createController('show/season_row', s).getView());
 		});
 		$.seasons.setData(seasons);		
 			
 		setTimeout(function() {
-			underscore.each(show.credits.cast, function(c) {
-				if (underscore.isEmpty(c["profile_path"]))
-					return false;
-				$.cast_images.add(Ti.UI.createImageView({
-					"class": "cast_image",
-					"image" : api.common.getImage({'size': 'w150', 'file': c["profile_path"]}),
-					"width": Titanium.UI.SIZE,
-					"height": "80dp",
-					"right": "5dp",
-					"preventDefaultImage": true,
-					"borderRadius": 3,
-				}));
-				$.cast_images.width += 55;
-			});
+			if (!_.isEmpty(show.credits.cast)) {
+				_.each(show.credits.cast, function(c) {
+					if (_.isEmpty(c["profile_path"]))
+						return false;
+					var cast = Ti.UI.createImageView({
+						"class": "cast_image",
+						"image" : api.common.getImage({'size': 'w150', 'file': c["profile_path"]}),
+						"width": Titanium.UI.SIZE,
+						"height": "80dp",
+						"right": "5dp",
+						"preventDefaultImage": true,
+						"borderRadius": 3,
+						"person_id": c.id
+					});
+					$.cast_images.add(cast);
+					$.cast_images.width += 55;
+					
+					cast.addEventListener('click', function(e) {
+						var person = Widget.createController('person/person', e.source.person_id).getView();
+						person.open({ fullscreen: true });
+					});
+				});
+			}
+			else
+				$.wrapper.bottom = 0;
 		}, 1000);
 				
 		if (show.videos.length > 0) {
-			underscore.each(show.videos, function(t) {
+			_.each(show.videos, function(t) {
 				if (t.site == "youtube") {
 					$.trailer.add(Ti.UI.createWebView({
 					    url: 'http://www.youtube.com/embed/' + t.key + '?autoplay=1&autohide=1&cc_load_policy=0&color=white&controls=0&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0',
@@ -124,15 +135,17 @@ $.tabs.addEventListener('scrollend', function(e) {
 				return false;
 			}
 				
-			if (underscore.isEmpty(response.torrents))
+			if (_.isEmpty(response.torrents)) {
+				Alloy.Globals.loading.hide();
 				return false;
+			}
 				
 			/* Sort by seeders */
-			var sorted_torrents = underscore.sortBy(response.torrents, function(t) { return - parseInt(t.seeders); });
+			var sorted_torrents = _.sortBy(response.torrents, function(t) { return - parseInt(t.seeders); });
 			
-			underscore.each(sorted_torrents, function(t) {
+			_.each(sorted_torrents, function(t) {
 				/* We use appendRow and not setData so as to keep the list ordered ... */
-				$.torrentsList.appendRow(Widget.createController('torrent', t).getView());
+				$.torrentsList.appendRow(Widget.createController('torrent/torrent', t).getView());
 			});
 			
 			$.torrentsList.animate( { opacity: 1, duration: 1000 });

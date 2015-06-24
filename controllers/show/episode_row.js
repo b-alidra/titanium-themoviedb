@@ -1,5 +1,4 @@
-var __  	= require('alloy/underscore'),
-	moment	= require('alloy/moment'),
+var moment	= require('alloy/moment'),
 	api		= require('themoviedb/themoviedb');
 
 var arg = arguments[0] || {};
@@ -28,7 +27,7 @@ function selectedEpisode(e) {
 	};
 	Ti.API.info(options);
 	setTimeout(function() {
-		Widget.createController('episode', options)
+		Widget.createController('show/episode', options)
 			.getView()
 			.open({ fullscreen: true });
 	}, 1000);

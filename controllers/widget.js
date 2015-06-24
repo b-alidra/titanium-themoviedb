@@ -124,7 +124,7 @@ function buildList(list, response, append) {
 	
 	pendingMovies[list] = [];
 	
-	if (response.results.length % 3 > 0) {
+	if (response.results.length > 3 && response.results.length % 3 > 0) {
 		pendingMovies[list] = _.rest(response.results, response.results.length - response.results.length % 3);
 		response.results = _.first(response.results, response.results.length - response.results.length % 3);
 	}
@@ -137,7 +137,7 @@ function buildList(list, response, append) {
 				results.push(response.results[i + 2]);
 		}
 		
-		var row = Widget.createController('movie_row', results).getView();
+		var row = Widget.createController('movie/movie_row', results).getView();
 		
 		if (append)
 			$[list].appendRow(row);

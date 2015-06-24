@@ -1,5 +1,4 @@
-var underscore  = require('alloy/underscore'),
-	moment  	= require('alloy/moment'),
+var moment  	= require('alloy/moment'),
 	api			= require('themoviedb/themoviedb'),
 	config 		= require('t411/config'),
 	t411		= new (require('t411/t411'))(
@@ -12,7 +11,7 @@ var TORRENTS_SLIDE_INDEX = 1;
 api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
 
 var options = arguments[0] || {};
-underscore.extend(options, { 'language': 'fr', 'append_to_response': 'images,videos,credits', 'include_image_language': 'fr,en,null' });
+_.extend(options, { 'language': 'fr', 'append_to_response': 'images,videos,credits', 'include_image_language': 'fr,en,null' });
 
 var episode;
 
@@ -23,11 +22,11 @@ $.torrentsTitle.text		= L('torrents');
 
 api.tvEpisodes.getById(options,
 	function(response) {
-		if (underscore.isEmpty(response))
+		if (_.isEmpty(response))
 			return false;
 		
 		episode = JSON.parse(response);
-		if (underscore.isEmpty(episode.still_path)) {
+		if (_.isEmpty(episode.still_path)) {
 			$.headerImage.image	= "backdrop.png";
 			$.infosWrapper.backgroundColor = "#0D000000";
 		}
@@ -39,7 +38,7 @@ api.tvEpisodes.getById(options,
 		$.season_episode.text	= L('season') + ' ' + options.season_number + ' ' + L('episode') + ' ' + episode.episode_number;
 		$.episode_name.text		= episode.name;
 		$.overview.value		= episode.overview;
-		$.episode_date.text		= moment(episode.air_date).format(L('time_date_format'));
+		$.episode_date.text		= moment(episode.air_date).format(L('date_format'));
 		
 		Alloy.Globals.loading.hide();
 	},
@@ -72,17 +71,17 @@ $.tabs.addEventListener('scrollend', function(e) {
 				return false;
 			}
 				
-			if (underscore.isEmpty(response.torrents)) {
+			if (_.isEmpty(response.torrents)) {
 				Alloy.Globals.loading.hide(); 
 				return false;
 			}
 				
 			/* Sort by seeders */
-			var sorted_torrents = underscore.sortBy(response.torrents, function(t) { return - parseInt(t.seeders); });
+			var sorted_torrents = _.sortBy(response.torrents, function(t) { return - parseInt(t.seeders); });
 			
-			underscore.each(sorted_torrents, function(t) {
+			_.each(sorted_torrents, function(t) {
 				/* We use appendRow and not setData so as to keep the list ordered ... */
-				$.torrentsList.appendRow(Widget.createController('torrent', t).getView());
+				$.torrentsList.appendRow(Widget.createController('torrent/torrent', t).getView());
 			});
 			
 			$.torrentsList.animate( { opacity: 1, duration: 1000 });

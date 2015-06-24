@@ -1,5 +1,4 @@
-var __  = require('alloy/underscore'),
-	api	= require('themoviedb/themoviedb');
+var api	= require('themoviedb/themoviedb');
 
 var args = arguments[0] || {};
 for (var i = 0; i < args.length; i++) {
@@ -8,9 +7,9 @@ for (var i = 0; i < args.length; i++) {
 	ban.movie_id = arg.id;
 	arg = arg.movie || arg.show || arg;
 
-	if (__.isEmpty(arg.poster_path)) {
+	if (_.isEmpty(arg.poster_path)) {
 		ban.image = 'poster.png';
-		$['bannerTitle' + (i+1)].text    = arg.original_title;
+		$['bannerTitle' + (i+1)].text    = arg.title;
 		$['bannerTitle' + (i+1)].opacity = 1; 
 	}
 	else {
@@ -26,7 +25,6 @@ for (var i = 0; i < args.length; i++) {
 }
 
 function selectedMovie(e) {
-	var movie = Widget.createController('movie', e.source.movie_id).getView();
-	//movie.left = Ti.Platform.displayCaps.platformWidth;
+	var movie = Widget.createController('movie/movie', e.source.movie_id).getView();
 	movie.open({ fullscreen: true });
 }

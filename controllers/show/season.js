@@ -1,5 +1,4 @@
-var underscore  = require('alloy/underscore'),
-	api			= require('themoviedb/themoviedb'),
+var api			= require('themoviedb/themoviedb'),
 	config 		= require('t411/config'),
 	t411		= new (require('t411/t411'))(
 		Ti.App.Properties.getString('t411_username'),
@@ -11,7 +10,7 @@ var TORRENTS_SLIDE_INDEX = 2;
 api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
 
 var options = arguments[0] || {};
-underscore.extend(options, { 'language': 'fr', 'append_to_response': 'images,videos,credits', 'include_image_language': 'fr,en,null' });
+_.extend(options, { 'language': 'fr', 'append_to_response': 'images,videos,credits', 'include_image_language': 'fr,en,null' });
 
 var season;
 
@@ -24,11 +23,11 @@ $.torrentsTitle.text		= L('torrents');
 
 api.tvSeasons.getById(options,
 	function(response) {
-		if (underscore.isEmpty(response))
+		if (_.isEmpty(response))
 			return false;
 		
 		season = JSON.parse(response);
-		if (underscore.isEmpty(options.show_backdrop)) {
+		if (_.isEmpty(options.show_backdrop)) {
 			$.headerImage.image	= "backdrop.png";
 			$.infosWrapper.backgroundColor = "#0D000000";
 		}
@@ -42,21 +41,21 @@ api.tvSeasons.getById(options,
 		$.nbVotes.text		= season.vote_count ? season.vote_count : 0;
 		$.overview.value	= season.overview;
 		
-		if (!underscore.isEmpty(season.genres)) {
+		if (!_.isEmpty(season.genres)) {
 			var genres = [];
-			underscore.each(season.genres, function(g) {
+			_.each(season.genres, function(g) {
 				genres.push(g.name);
 			});
 			$.genres.text = genres.join(' - ');
 		}
 		
-		underscore.each(season.episodes, function(e) {
+		_.each(season.episodes, function(e) {
 			e.show_name		= options.show_name;
 			e.show_id		= options.id;
 			e.show_backdrop = options.show_backdrop;
 			e.season_number	= season.season_number;
 			e.season_poster	= season.poster_path;
-			$.episodes.appendRow(Widget.createController('episode_row', e).getView());
+			$.episodes.appendRow(Widget.createController('show/episode_row', e).getView());
 		});
 		
 		Alloy.Globals.loading.hide();
@@ -86,15 +85,15 @@ $.tabs.addEventListener('scrollend', function(e) {
 				return false;
 			}
 				
-			if (underscore.isEmpty(response.torrents))
+			if (_.isEmpty(response.torrents))
 				return false;
 				
 			/* Sort by seeders */
-			var sorted_torrents = underscore.sortBy(response.torrents, function(t) { return - parseInt(t.seeders); });
+			var sorted_torrents = _.sortBy(response.torrents, function(t) { return - parseInt(t.seeders); });
 			
-			underscore.each(sorted_torrents, function(t) {
+			_.each(sorted_torrents, function(t) {
 				/* We use appendRow and not setData so as to keep the list ordered ... */
-				$.torrentsList.appendRow(Widget.createController('torrent', t).getView());
+				$.torrentsList.appendRow(Widget.createController('torrent/torrent', t).getView());
 			});
 			
 			$.torrentsList.animate( { opacity: 1, duration: 1000 });

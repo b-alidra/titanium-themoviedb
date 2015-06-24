@@ -2,22 +2,26 @@
 	<Window id="win">
 		<View class="vgroup" id="wrapper">
 			<View class="abs">
-				<ImageView id="headerImage"></ImageView>
-				<View class="hgroup" id="voteRow">
-					<Label id="heartIcon" class="fa-icon" icon="fa-heart"/>
-					<Label id="score"></Label>
-					<Label id="nbVotes"></Label>
-					<Label id="votes"></Label>
+				<View class="vgroup">
+					<View class="abs">
+						<ImageView id="headerImage"></ImageView>
+						<View class="hgroup" id="voteRow">
+							<Label id="heartIcon" class="fa-icon" icon="fa-heart"/>
+							<Label id="score"></Label>
+							<Label id="nbVotes"></Label>
+							<Label id="votes"></Label>
+						</View>
+						<View class="hgroup" id="infosWrapper">
+							<Label id="title"></Label>
+						</View>
+					</View>
+					<Label id="year"></Label>
+					<Label id="genres"></Label>
 				</View>
-				<View class="hgroup" id="infosWrapper">
-					<Label id="title"></Label>
+				<View class="abs" id="posterWrapper">
+					<ImageView id="poster"></ImageView>
 				</View>
 			</View>
-			<View class="abs" id="posterWrapper">
-				<ImageView id="poster"></ImageView>
-			</View>
-			<Label id="year"></Label>
-			<Label id="genres"></Label>
 			<ScrollableView id="tabs">
 				<View id="seasonsWrapper" class="vgroup">
 					<View class="hsep" />

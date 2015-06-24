@@ -1,5 +1,4 @@
-var __  	= require('alloy/underscore'),
-	moment  = require('alloy/moment'),
+var moment  = require('alloy/moment'),
 	api		= require('themoviedb/themoviedb');
 
 var arg = arguments[0] || {};
@@ -29,7 +28,7 @@ function selectedSeason(e) {
 		"show_backdrop": e.source.show_backdrop
 	};
 
-	Widget.createController('season', options)
+	Widget.createController('show/season', options)
 		.getView()
 		.open({ fullscreen: true });
 }
