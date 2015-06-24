@@ -1,0 +1,200 @@
+"Window": {
+	backgroundColor: "#000000",
+    layout: "absolute",
+    navBarHidden: true
+},
+"Window[platform=ios]": {
+    statusBarStyle:Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
+},
+"#wrapper" : {
+	backgroundColor: "#000000",
+	top: 0,
+	left: 0,
+	right: 0,
+	bottom: 0
+},
+"#backIcon": {
+	font: {
+		fontSize: "36dp",
+		fontWeight: "bold"
+	},
+	color: "#FFFFFF",
+	top: "20dp",
+	left: "10dp",
+	zIndex: 10,
+	width: "50dp",
+	height: "50dp"
+},
+"#headerImage": {
+	top: 0,
+	left: 0,
+	right: 0,
+	height: Titanium.UI.SIZE,
+	preventDefaultImage: true,
+	zIndex: 1
+},
+"#voteRow": {
+	height: "25dp",
+	top: "10dp",
+	width: Titanium.UI.SIZE,
+	right: "10dp",
+	zIndex: 12
+},
+"#infosWrapper": {
+	top: "65dp",
+	left: "120dp",
+	right: 0,
+	backgroundColor: "#0D000000",
+	zIndex: 10
+}
+"#name": {
+	left: 0,
+	right: "10dp",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+	font: {
+		fontFamily: "OpenSans-Bold",
+		fontSize: '20dp'
+	},
+	color: "#FFFFFF"
+},
+"#birth": {
+	top: 0,
+	left: 0,
+	right: "10dp",
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: '14dp'
+	},
+	color: "#FFFFFF",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+},
+"#birth_place": {
+	top: 0,
+	left: 0,
+	right: "10dp",
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: '12dp'
+	},
+	color: "#FFFFFF",
+	
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+},
+"#posterWrapper": {
+	top: "65dp",
+	left: "10dp",
+	width: "110dp",
+	height: Titanium.UI.SIZE,
+	zIndex: 10,
+	backgroundColor: "transparent"
+},
+"#poster": {
+	preventDefaultImage: true,
+	borderWidth: 2,
+	borderColor: "#FFFFFF",
+	borderRadius: 4,
+	left: 0,
+	width: "110dp",
+	height: Titanium.UI.SIZE,
+	zIndex: 10
+},
+/*
+ Alpha Level	HEX Code
+100%			FF
+95%				F2
+90%				E6
+85%				D9
+80%				CC
+75%				BF
+70%				B3
+65%				A6
+60%				99
+55%				8C
+50%				80
+45%				73
+40%				66
+35%				59
+30%				4D
+25%				40
+20%				33
+15%				26
+10%				1A
+5%				0D
+0%				00
+ */
+"#tabs": {
+	top: 0,
+	bottom: "5dp",
+	backgroundColor: "#000000",
+	showPagingControl: true,
+	pagingControlColor: "#000000",
+	pagingControlAlpha: 1,
+	pagingControlOnTop: "true"
+},
+".tabsTitle": {
+	font: {
+		fontFamily: "OpenSans-Bold",
+		fontSize: '14dp',
+		fontWeight: 'bold'
+	},
+	backgroundColor: "#000000",
+	color: "#FFFFFF",
+	top: 0,
+	width: "100%",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	verticalAlign: Titanium.UI.TEXT_VERTICAL_ALIGNMENT_TOP
+},
+"#bioWrapper": {
+	backgroundColor: "#000000",
+	height: Titanium.UI.FILL
+},
+"#bio": {
+	top: "5dp",
+	left: "10dp",
+	right: "10dp",
+	bottom: 0,
+	font: {
+		fontFamily: "OpenSans",
+		fontSize: '12dp'
+	},
+	backgroundColor: "#000000",
+	color: "#FFFFFF",
+	editable: false
+},
+"#moviesWrapper": {
+	backgroundColor: "#000000",
+	height: Titanium.UI.FILL
+},
+"#moviesList": {
+	top: 0,
+	left: 0,
+	right: "15dp",
+	bottom: 0,
+	backgroundColor : Alloy.Globals.theme.movies.backgroundColor,
+	footerTitle: "",
+    separatorColor: Alloy.Globals.theme.movies.separatorColor,
+    opacity: 1
+},
+"#showsWrapper": {
+	backgroundColor: "#000000",
+	height: Titanium.UI.FILL
+},
+"#showsList": {
+	top: 0,
+	left: 0,
+	right: "15dp",
+	bottom: 0,
+	backgroundColor : Alloy.Globals.theme.movies.backgroundColor,
+	footerTitle: "",
+    separatorColor: Alloy.Globals.theme.movies.separatorColor,
+    opacity: 1
+},
+"#heartIcon": {
+	font: { fontSize: '10dp' },
+	color: "#FFFFFF"
+},
+"#score": {
+	font: { fontSize: '10dp' },
+	color: "#FFFFFF",
+	left: "2dp"
+}

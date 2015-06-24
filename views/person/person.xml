@@ -1,0 +1,43 @@
+<Alloy>
+	<Window id="win">
+		<View class="vgroup" id="wrapper">
+			<View class="abs">
+				<ImageView id="headerImage" image="backdrop.png"></ImageView>
+				<View class="hgroup" id="voteRow">
+					<Label id="heartIcon" class="fa-icon" icon="fa-heart"/>
+					<Label id="score"></Label>
+				</View>
+				<View class="vgroup" id="infosWrapper">
+					<Label id="name"></Label>
+					<Label id="birth"></Label>
+					<Label id="birth_place"></Label>
+				</View>
+				<View class="abs" id="posterWrapper">
+					<ImageView id="poster"></ImageView>
+				</View>
+			</View>
+			<ScrollableView id="tabs">
+				<View id="bioWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="bioTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TextArea id="bio"></TextArea>
+				</View>
+				<View id="moviesWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="moviesTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TableView id="moviesList" />
+				</View>
+				<View id="showsWrapper" class="vgroup">
+					<View class="hsep" />
+					<Label id="showsTitle" class="tabsTitle"/>
+					<View class="hsep" />
+					<TableView id="showsList" />
+				</View>
+			</ScrollableView>
+       	</View>
+		<Label id="backIcon" class="fa-icon" icon="fa-angle-left"/>
+		<Widget id="fa" src="com.mattmcfarland.fontawesome" debug="true"/>
+	</Window>
+</Alloy>
