@@ -12,7 +12,7 @@ $.bioTitle.text		= L('bio');
 $.moviesTitle.text	= L('movies');
 $.showsTitle.text	= L('shows');
 
-api.people.getById({ 'id': person_id, 'language': 'fr', 'append_to_response': 'images,movie_credits,tv_credits', 'include_image_language': 'fr,en,null' },
+api.people.getById({ 'id': person_id, 'language': Titanium.Locale.getCurrentLanguage(), 'append_to_response': 'images,movie_credits,tv_credits', 'include_image_language': Titanium.Locale.getCurrentLanguage() + ',en,null' },
 	function(response) {
 		if (_.isEmpty(response))
 			return false;

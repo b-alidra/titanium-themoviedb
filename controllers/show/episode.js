@@ -11,7 +11,7 @@ var TORRENTS_SLIDE_INDEX = 1;
 api.common.api_key = '1b3785a9a5de9fd3452af6e32e092357';
 
 var options = arguments[0] || {};
-_.extend(options, { 'language': 'fr', 'append_to_response': 'images,videos,credits', 'include_image_language': 'fr,en,null' });
+_.extend(options, { 'language': Titanium.Locale.getCurrentLanguage(), 'append_to_response': 'images,videos,credits', 'include_image_language': Titanium.Locale.getCurrentLanguage() + ',en,null' });
 
 var episode;
 

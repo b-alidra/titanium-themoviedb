@@ -59,7 +59,7 @@ function loadShows(type, list, callback, page) {
 	
 	page = page || 1;
 	
-	api.tv[type]({'language': 'fr', 'include_adult': false, 'page': page, 'include_image_language': 'fr, en,null'},
+	api.tv[type]({'language': Titanium.Locale.getCurrentLanguage(), 'include_adult': false, 'page': page, 'include_image_language': Titanium.Locale.getCurrentLanguage() + ', en,null'},
 		function(response) {
 			buildList(list, response, page > 1);
 			Alloy.Globals.loading.hide();

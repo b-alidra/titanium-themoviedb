@@ -20,7 +20,7 @@ $.trailersTitle.text		= L('trailer');
 $.synopsisTitle.text		= L('synopsis');
 $.torrentsTitle.text		= L('torrents');
 
-api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'images,trailers,credits', 'include_image_language': 'fr,en,null' },
+api.movies.getById({ 'id': movie_id, 'language': Titanium.Locale.getCurrentLanguage(), 'append_to_response': 'images,trailers,credits', 'include_image_language': Titanium.Locale.getCurrentLanguage() + ',en,null' },
 	function(response) {
 		if (_.isEmpty(response))
 			return false;
@@ -36,6 +36,7 @@ api.movies.getById({ 'id': movie_id, 'language': 'fr', 'append_to_response': 'im
 			
 		$.poster.image		= api.common.getImage({'size': 'w300', 'file': movie.poster_path});
 		$.title.text		= movie.title;
+		$.runtime.text		= movie.runtime + ' min';
 		$.year.text			= movie.release_date ? moment(movie.release_date).format(L('date_format')) : '';
 		$.score.text		= movie.popularity ? parseInt(movie.popularity) + "%" : 0;
 		$.nbVotes.text		= movie.vote_count ? movie.vote_count : 0;

@@ -22,7 +22,7 @@ $.synopsisTitle.text		= L('synopsis');
 $.trailersTitle.text		= L('trailer');
 $.torrentsTitle.text		= L('torrents');
 
-api.tv.getById({ 'id': show_id, 'language': 'fr', 'append_to_response': 'images,videos,credits', 'include_image_language': 'fr,en,null' },
+api.tv.getById({ 'id': show_id, 'language': Titanium.Locale.getCurrentLanguage(), 'append_to_response': 'images,videos,credits', 'include_image_language': Titanium.Locale.getCurrentLanguage() + ',en,null' },
 	function(response) {
 		if (_.isEmpty(response))
 			return false;

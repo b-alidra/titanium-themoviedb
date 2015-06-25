@@ -15,7 +15,10 @@
 							<Label id="title"></Label>
 						</View>
 					</View>
-					<Label id="year"></Label>
+					<View class="abs">
+						<Label id="runtime"></Label>
+						<Label id="year"></Label>
+					</View>
 					<Label id="genres"></Label>
 				</View>
 				<View class="abs" id="posterWrapper">

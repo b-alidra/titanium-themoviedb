@@ -91,15 +91,23 @@
 	zIndex: 10
 }
 "#title": {
-	left: "120dp",
+	left: "125dp",
 	right: "10dp",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
 	font: {
-		fontFamily: "OpenSans",
-		fontSize: '20dp',
-		fontWeight: 'bold'
+		fontFamily: "OpenSans-Bold",
+		fontSize: '20dp'
 	},
 	color: "#FFFFFF"
+},
+"#runtime": {
+	top: 0,
+	left: "125dp",
+	font: {
+		fontSize: '12dp'
+	},
+	color: "#FFFFFF",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
 },
 "#year": {
 	top: 0,
@@ -116,7 +124,7 @@
 		fontSize: '12dp'
 	},
 	color: "#FFFFFF",
-	left: "120dp",
+	left: "125dp",
 	right: "10dp",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
 },
