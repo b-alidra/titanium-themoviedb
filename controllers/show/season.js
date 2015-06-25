@@ -59,6 +59,29 @@ api.tvSeasons.getById(options,
 		});
 		
 		Alloy.Globals.loading.hide();
+		
+		/* Load english overview if empty in local language */
+		if (_.isEmpty($.overview.value) && Titanium.Locale.getCurrentLanguage() != 'en') {
+			Alloy.Globals.loading.show(L('list_loading'), false);
+			api.tvSeasons.getById({ 'id': options.id,  'season_number': options.season_number },
+				function(response) {
+					if (_.isEmpty(response))
+						return false;
+					$.overview.value = JSON.parse(response).overview;
+					Alloy.Globals.loading.hide();
+				},
+				function() {
+					Alloy.Globals.loading.hide();
+					Alloy.createWidget("com.mcongrove.toast", null, {
+				    	text: L('cant_connect'),
+					    duration: 5000,
+					    view: $.wrapper
+					});
+					
+					return false;
+				}
+			);
+		}
 	},
 	function() {
 		Alloy.Globals.loading.hide();

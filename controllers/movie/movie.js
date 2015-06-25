@@ -36,7 +36,7 @@ api.movies.getById({ 'id': movie_id, 'language': Titanium.Locale.getCurrentLangu
 			
 		$.poster.image		= api.common.getImage({'size': 'w300', 'file': movie.poster_path});
 		$.title.text		= movie.title;
-		$.runtime.text		= movie.runtime + ' min';
+		$.runtime.text		= movie.runtime ? movie.runtime + ' min' : '';
 		$.year.text			= movie.release_date ? moment(movie.release_date).format(L('date_format')) : '';
 		$.score.text		= movie.popularity ? parseInt(movie.popularity) + "%" : 0;
 		$.nbVotes.text		= movie.vote_count ? movie.vote_count : 0;
@@ -98,13 +98,36 @@ api.movies.getById({ 'id': movie_id, 'language': Titanium.Locale.getCurrentLangu
 			$.tabs.remove($.trailersWrapper);
 		}
 		Alloy.Globals.loading.hide();
+		
+		/* Load english overview if empty in local language */
+		if (_.isEmpty($.overview.value) && Titanium.Locale.getCurrentLanguage() != 'en') {
+			Alloy.Globals.loading.show(L('list_loading'), false);
+			api.movies.getById({ 'id': movie_id },
+				function(response) {
+					if (_.isEmpty(response))
+						return false;
+					$.overview.value = JSON.parse(response).overview;
+					Alloy.Globals.loading.hide();
+				},
+				function() {
+					Alloy.Globals.loading.hide();
+					Alloy.createWidget("com.mcongrove.toast", null, {
+				    	text: L('cant_connect'),
+					    duration: 5000,
+					    view: $.wrapper
+					});
+					
+					return false;
+				}
+			);
+		}
 	},
 	function() {
 		Alloy.Globals.loading.hide();
 		Alloy.createWidget("com.mcongrove.toast", null, {
 	    	text: L('cant_connect'),
 		    duration: 5000,
-		    view: $.tableList
+		    view: $.wrapper
 		});
 		
 		return false;
